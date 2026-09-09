@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta
+    name="description"
+    content="Secure checkout — Solowise India"
+  />
+  <title>Secure Checkout — Solowise India</title>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #f8f8f5;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-solid: #ffffff;
+      --surface-soft: #f0f0eb;
+      --text: #151515;
+      --muted: #6a6a64;
+      --faint: #92918a;
+      --border: rgba(22, 22, 22, 0.11);
+      --border-strong: rgba(22, 22, 22, 0.2);
+      --accent: #171717;
+      --accent-text: #ffffff;
+      --danger: #e23b35;
+      --success: #178251;
+      --warning: #ba6d00;
+      --shadow: 0 25px 80px rgba(25, 25, 20, 0.11);
+      --header-bg: rgba(248, 248, 245, 0.76);
+      --input-bg: rgba(255, 255, 255, 0.54);
+      --glow-one: rgba(196, 164, 80, 0.14);
+      --glow-two: rgba(78, 123, 171, 0.1);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0f;
+        --surface: rgba(29, 29, 32, 0.72);
+        --surface-solid: #19191c;
+        --surface-soft: #202024;
+        --text: #f5f4ef;
+        --muted: #aaa9a4;
+        --faint: #777772;
+        --border: rgba(255, 255, 255, 0.12);
+        --border-strong: rgba(255, 255, 255, 0.21);
+        --accent: #f5f4ef;
+        --accent-text: #121214;
+        --danger: #ff645d;
+        --success: #5ee2a0;
+        --warning: #f3af47;
+        --shadow: 0 28px 86px rgba(0, 0, 0, 0.45);
+        --header-bg: rgba(13, 13, 15, 0.76);
+        --input-bg: rgba(255, 255, 255, 0.045);
+        --glow-one: rgba(206, 175, 85, 0.1);
+        --glow-two: rgba(80, 126, 186, 0.1);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 5%, var(--glow-one), transparent 29%),
+        radial-gradient(circle at 94% 18%, var(--glow-two), transparent 31%),
+        var(--bg);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: 0.14;
+      background-image:
+        linear-gradient(rgba(127, 127, 127, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 127, 127, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 30;
+      top: 0;
+      display: flex;
+      height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 5vw;
+      border-bottom: 1px solid var(--border);
+      background: var(--header-bg);
+      backdrop-filter: blur(20px) saturate(145%);
+      -webkit-backdrop-filter: blur(20px) saturate(145%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.83rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: var(--accent);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      position: absolute;
+      content: "";
+      border-radius: 50%;
+      background: var(--accent-text);
+    }
+
+    .brand-mark::before {
+      top: 5px;
+      left: 5px;
+      width: 8px;
+      height: 8px;
+    }
+
+    .brand-mark::after {
+      right: 4px;
+      bottom: 4px;
+      width: 13px;
+      height: 13px;
+      opacity: 0.72;
+    }
+
+    .secure-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 760;
+    }
+
+    .secure-pill svg {
+      width: 17px;
+      height: 17px;
+      color: var(--success);
+    }
+
+    .checkout-shell {
+      width: min(1190px, 100%);
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 68px) 5vw 54px;
+    }
+
+    .checkout-heading {
+      margin-bottom: clamp(28px, 4vw, 45px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--success);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      content: "";
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 5px color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    .checkout-heading h1 {
+      max-width: 680px;
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.7rem);
+      font-weight: 860;
+      letter-spacing: -0.07em;
+      line-height: 0.95;
+      text-wrap: balance;
+    }
+
+    .checkout-heading p {
+      max-width: 590px;
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .progress-wrap {
+      width: min(680px, 100%);
+      margin: 0 0 clamp(31px, 4vw, 48px);
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+      color: var(--faint);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .progress-labels span.active {
+      color: var(--text);
+    }
+
+    .progress-rail {
+      position: relative;
+      width: 100%;
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-soft);
+    }
+
+    .progress-value {
+      width: 50%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 30%, transparent);
+      transition: width 520ms cubic-bezier(0.2, 0.85, 0.25, 1);
+    }
+
+    .progress-value.step-two {
+      width: 100%;
+    }
+
+    .checkout-step {
+      animation: reveal 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .step-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.75fr);
+      align-items: start;
+      gap: clamp(24px, 5vw, 78px);
+    }
+
+    .form-card,
+    .summary-card,
+    .review-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px) saturate(130%);
+      -webkit-backdrop-filter: blur(20px) saturate(130%);
+    }
+
+    .form-card {
+      padding: clamp(24px, 4vw, 43px);
+    }
+
+    .card-title {
+      margin: 0 0 7px;
+      font-size: clamp(1.25rem, 2vw, 1.72rem);
+      font-weight: 820;
+      letter-spacing: -0.045em;
+    }
+
+    .card-subtitle {
+      margin: 0 0 29px;
+      color: var(--muted);
+      font-size: 0.91rem;
+      line-height: 1.6;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .field input {
+      width: 100%;
+      height: 55px;
+      padding: 0 15px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      color: var(--text);
+      background: var(--input-bg);
+      font-size: 0.96rem;
+      transition:
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+    }
+
+    .field input::placeholder {
+      color: var(--faint);
+    }
+
+    .field input:focus {
+      border-color: var(--text);
+      background: var(--surface-solid);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 8%, transparent);
+    }
+
+    .field input.invalid {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 10%, transparent);
+    }
+
+    .field-error {
+      display: none;
+      color: var(--danger);
+      font-size: 0.75rem;
+      font-weight: 680;
+    }
+
+    .field-error.visible {
+      display: block;
+    }
+
+    .continue-button,
+    .pay-button {
+      display: inline-flex;
+      width: 100%;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 28px;
+      padding: 0 20px;
+      cursor: pointer;
+      border: 0;
+      border-radius: 15px;
+      color: var(--accent-text);
+      background: var(--accent);
+      box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 22%, transparent);
+      font-size: 0.91rem;
+      font-weight: 850;
+      transition:
+        transform 180ms ease,
+        opacity 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .continue-button:hover,
+    .pay-button:hover {
+      box-shadow: 0 16px 34px color-mix(in srgb, var(--accent) 30%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .continue-button:active,
+    .pay-button:active {
+      transform: scale(0.985);
+    }
+
+    .continue-button:disabled,
+    .pay-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.64;
+      transform: none;
+    }
+
+    .continue-button svg,
+    .pay-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .privacy-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 580;
+      line-height: 1.55;
+    }
+
+    .privacy-note svg {
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      color: var(--success);
+    }
+
+    .summary-card {
+      overflow: hidden;
+    }
+
+    .summary-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: var(--surface-soft);
+    }
+
+    .summary-image-placeholder {
+      display: grid;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      place-items: center;
+      color: var(--faint);
+      background: var(--surface-soft);
+    }
+
+    .summary-image-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.55;
+    }
+
+    .summary-content {
+      padding: 23px;
+    }
+
+    .summary-kicker {
+      color: var(--success);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .summary-product-name {
+      margin: 8px 0 13px;
+      font-size: 1.17rem;
+      font-weight: 810;
+      letter-spacing: -0.035em;
+      line-height: 1.18;
+    }
+
+    .summary-price {
+      color: var(--text);
+      font-size: 1.26rem;
+      font-weight: 860;
+      letter-spacing: -0.045em;
+    }
+
+    .safe-list {
+      display: grid;
+      gap: 11px;
+      padding: 18px 0 0;
+      margin: 18px 0 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .safe-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 680;
+    }
+
+    .safe-item svg {
+      flex: 0 0 auto;
+      width: 17px;
+      height: 17px;
+      color: var(--success);
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0;
+      margin: 0 0 18px;
+      cursor: pointer;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      font-size: 0.82rem;
+      font-weight: 760;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .back-button:hover {
+      color: var(--text);
+      transform: translateX(-3px);
+    }
+
+    .back-button svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: clamp(23px, 4vw, 60px);
+      align-items: start;
+    }
+
+    .review-card {
+      padding: clamp(20px, 3vw, 32px);
+    }
+
+    .order-product {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding-bottom: 21px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .order-product-image {
+      flex: 0 0 auto;
+      width: 91px;
+      height: 91px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--surface-soft);
+    }
+
+    .order-product-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .order-product-copy {
+      min-width: 0;
+    }
+
+    .order-product-label {
+      color: var(--success);
+      font-size: 0.69rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .order-product-name {
+      margin: 6px 0 8px;
+      font-size: 1.08rem;
+      font-weight: 820;
+      letter-spacing: -0.04em;
+      line-height: 1.18;
+    }
+
+    .order-product-price {
+      font-size: 0.92rem;
+      font-weight: 780;
+    }
+
+    .coupon-box {
+      margin: 24px 0;
+    }
+
+    .coupon-label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 0.79rem;
+      font-weight: 810;
+    }
+
+    .coupon-row {
+      display: flex;
+      gap: 9px;
+    }
+
+    .coupon-row input {
+      min-width: 0;
+      flex: 1;
+      height: 49px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      outline: none;
+      color: var(--text);
+      background: var(--input-bg);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .coupon-row input:focus {
+      border-color: var(--text);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 8%, transparent);
+    }
+
+    .coupon-button {
+      min-width: 94px;
+      height: 49px;
+      padding: 0 14px;
+      cursor: pointer;
+      border: 1px solid var(--border-strong);
+      border-radius: 13px;
+      color: var(--text);
+      background: transparent;
+      font-size: 0.8rem;
+      font-weight: 820;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .coupon-button:hover {
+      background: var(--surface-soft);
+      transform: translateY(-1px);
+    }
+
+    .coupon-button:disabled {
+      cursor: wait;
+      opacity: 0.6;
+    }
+
+    .coupon-message {
+      min-height: 19px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .coupon-message.success {
+      color: var(--success);
+    }
+
+    .coupon-message.error {
+      color: var(--danger);
+    }
+
+    .order-summary-heading {
+      margin: 0 0 16px;
+      font-size: 0.78rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .price-lines {
+      display: grid;
+      gap: 13px;
+    }
+
+    .price-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.89rem;
+      font-weight: 650;
+    }
+
+    .price-line span:last-child {
+      color: var(--text);
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .price-line.discount {
+      color: var(--success);
+    }
+
+    .price-line.discount span:last-child {
+      color: var(--success);
+    }
+
+    .total-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 19px;
+      margin-top: 19px;
+      border-top: 1px solid var(--border);
+    }
+
+    .total-line span:first-child {
+      font-size: 0.96rem;
+      font-weight: 820;
+    }
+
+    .total-line span:last-child {
+      font-size: 1.7rem;
+      font-weight: 870;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+    }
+
+    .timer-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      margin-top: 24px;
+      border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--border));
+      border-radius: var(--radius-md);
+      color: var(--danger);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--danger) 10%, transparent), transparent 65%),
+        var(--surface);
+    }
+
+    .timer-card svg {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+    }
+
+    .timer-copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .timer-copy span:first-child {
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 730;
+    }
+
+    .timer-value {
+      color: var(--danger);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .customer-preview {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 16px 0 0;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .customer-preview svg {
+      flex: 0 0 auto;
+      width: 19px;
+      height: 19px;
+      color: var(--muted);
+    }
+
+    .customer-preview-copy {
+      min-width: 0;
+    }
+
+    .customer-preview-label {
+      margin-bottom: 4px;
+      color: var(--faint);
+      font-size: 0.69rem;
+      font-weight: 810;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .customer-preview-value {
+      overflow: hidden;
+      color: var(--text);
+      font-size: 0.81rem;
+      font-weight: 690;
+      line-height: 1.4;
+      text-overflow: ellipsis;
+    }
+
+    .pay-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 620;
+      text-align: center;
+    }
+
+    .pay-note svg {
+      width: 16px;
+      height: 16px;
+      color: var(--success);
+    }
+
+    .payment-error {
+      display: none;
+      padding: 13px 14px;
+      margin-top: 17px;
+      border: 1px solid color-mix(in srgb, var(--danger) 32%, transparent);
+      border-radius: 13px;
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 8%, transparent);
+      font-size: 0.78rem;
+      font-weight: 660;
+      line-height: 1.5;
+    }
+
+    .payment-error.visible {
+      display: block;
+    }
+
+    .loading-screen,
+    .error-screen {
+      display: grid;
+      min-height: calc(100vh - 76px);
+      place-items: center;
+      padding: 48px 5vw;
+    }
+
+    .loading-card,
+    .error-card {
+      width: min(500px, 100%);
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+      backdrop-filter: blur(18px);
+    }
+
+    .loader {
+      width: 45px;
+      height: 45px;
+      margin: 0 auto 17px;
+      border: 3px solid var(--border);
+      border-top-color: var(--text);
+      border-radius: 50%;
+      animation: spin 800ms linear infinite;
+    }
+
+    .loading-card h1,
+    .error-card h1 {
+      margin: 0 0 9px;
+      font-size: 1.34rem;
+      letter-spacing: -0.04em;
+    }
+
+    .loading-card p,
+    .error-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+      line-height: 1.6;
+    }
+
+    .return-button {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      margin-top: 20px;
+      border-radius: 12px;
+      color: var(--accent-text);
+      background: var(--accent);
+      font-size: 0.83rem;
+      font-weight: 820;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 880px) {
+      .step-layout,
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        max-width: 620px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        height: 66px;
+        padding: 0 18px;
+      }
+
+      .secure-pill {
+        font-size: 0.7rem;
+      }
+
+      .checkout-shell {
+        padding: 28px 18px 44px;
+      }
+
+      .checkout-heading h1 {
+        font-size: clamp(2.25rem, 11vw, 3.5rem);
+      }
+
+      .form-card,
+      .review-card {
+        border-radius: 22px;
+      }
+
+      .form-card {
+        padding: 23px 19px;
+      }
+
+      .summary-content {
+        padding: 19px;
+      }
+
+      .order-product {
+        gap: 12px;
+      }
+
+      .order-product-image {
+        width: 72px;
+        height: 72px;
+        border-radius: 14px;
+      }
+
+      .coupon-row {
+        gap: 7px;
+      }
+
+      .coupon-button {
+        min-width: 82px;
+        padding: 0 10px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .secure-pill {
+        display: none;
+      }
+
+      .coupon-row {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .coupon-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Solowise India home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Solowise India</span>
+    </a>
+
+    <div class="secure-pill">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+        <path d="m9 12 2 2 4-4"></path>
+      </svg>
+      <span>Encrypted checkout</span>
+    </div>
+  </header>
+
+  <main id="loadingState" class="loading-screen">
+    <section class="loading-card" aria-live="polite">
+      <div class="loader" aria-hidden="true"></div>
+      <h1>Preparing secure checkout</h1>
+      <p>Loading your order from Solowise India.</p>
+    </section>
+  </main>
+
+  <main id="errorState" class="error-screen hidden">
+    <section class="error-card">
+      <h1 id="errorTitle">Checkout unavailable</h1>
+      <p id="errorMessage">We could not prepare your order.</p>
+      <a class="return-button" href="./index.html">Return to store</a>
+    </section>
+  </main>
+
+  <main id="checkoutPage" class="checkout-shell hidden">
+    <section class="checkout-heading">
+      <div id="checkoutEyebrow" class="eyebrow">Secure checkout</div>
+      <h1 id="checkoutTitle">A few details, then you’re in.</h1>
+      <p id="checkoutSubtitle">
+        Complete your details to unlock a fast and protected payment experience.
+      </p>
+    </section>
+
+    <section class="progress-wrap" aria-label="Checkout progress">
+      <div class="progress-labels">
+        <span id="progressLabelOne" class="active">Your details</span>
+        <span id="progressLabelTwo">Review & payment</span>
+      </div>
+
+      <div class="progress-rail">
+        <div id="progressValue" class="progress-value"></div>
+      </div>
+    </section>
+
+    <!-- STEP ONE -->
+    <section id="stepOne" class="checkout-step">
+      <div class="step-layout">
+        <form id="customerForm" class="form-card" novalidate>
+          <h2 class="card-title">Where should we send it?</h2>
+          <p class="card-subtitle">
+            Your order details and product access will be sent to this email address.
+          </p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="customerName">Full name</label>
+              <input
+                id="customerName"
+                name="customerName"
+                type="text"
+                autocomplete="name"
+                placeholder="Enter your full name"
+                maxlength="100"
+                required
+              />
+              <span id="nameError" class="field-error">
+                Please enter your name.
+              </span>
+            </div>
+
+            <div class="field">
+              <label for="customerEmail">Email address</label>
+              <input
+                id="customerEmail"
+                name="customerEmail"
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                maxlength="254"
+                required
+              />
+              <span id="emailError" class="field-error">
+                Enter a valid email address.
+              </span>
+            </div>
+          </div>
+
+          <button class="continue-button" type="submit">
+            <span>Continue to review</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </button>
+
+          <p class="privacy-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+            </svg>
+            <span>Your information is used only to fulfill this order and provide product access.</span>
+          </p>
+        </form>
+
+        <aside class="summary-card" aria-label="Product preview">
+          <div id="stepOneImageWrap"></div>
+
+          <div class="summary-content">
+            <div class="summary-kicker">Your selection</div>
+            <div id="stepOneProductName" class="summary-product-name">Product</div>
+            <div id="stepOneProductPrice" class="summary-price">₹0</div>
+
+            <div class="safe-list">
+              <div class="safe-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+                <span>Protected by Razorpay secure payments</span>
+              </div>
+
+              <div class="safe-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+                <span>Instant access after successful payment</span>
+              </div>
+
+              <div class="safe-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 7 9 18l-5-5"></path>
+                </svg>
+                <span>Simple, one-time payment</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STEP TWO -->
+    <section id="stepTwo" class="checkout-step hidden">
+      <button id="backToDetails" class="back-button" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        <span>Edit details</span>
+      </button>
+
+      <div class="review-grid">
+        <section class="review-card">
+          <div class="order-product">
+            <div class="order-product-image">
+              <img id="reviewProductImage" src="" alt="" />
+            </div>
+
+            <div class="order-product-copy">
+              <div class="order-product-label">Solowise India</div>
+              <div id="reviewProductName" class="order-product-name">Product</div>
+              <div id="reviewProductPrice" class="order-product-price">₹0</div>
+            </div>
+          </div>
+
+          <div class="coupon-box">
+            <label class="coupon-label" for="couponCode">Have a coupon code?</label>
+
+            <div class="coupon-row">
+              <input
+                id="couponCode"
+                type="text"
+                autocomplete="off"
+                placeholder="ENTER CODE"
+                maxlength="60"
+              />
+              <button id="applyCouponButton" class="coupon-button" type="button">
+                Apply
+              </button>
+            </div>
+
+            <p id="couponMessage" class="coupon-message"></p>
+          </div>
+
+          <div class="customer-preview">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 21a8 8 0 0 1 16 0"></path>
+            </svg>
+
+            <div class="customer-preview-copy">
+              <div class="customer-preview-label">Order confirmation</div>
+              <div id="customerPreview" class="customer-preview-value"></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="review-card">
+          <h2 class="order-summary-heading">Order summary</h2>
+
+          <div class="price-lines">
+            <div class="price-line">
+              <span>Product price</span>
+              <span id="subtotalPrice">₹0</span>
+            </div>
+
+            <div id="discountRow" class="price-line discount hidden">
+              <span id="discountLabel">Coupon discount</span>
+              <span id="discountValue">− ₹0</span>
+            </div>
+
+            <div class="price-line">
+              <span>Delivery</span>
+              <span>Free</span>
+            </div>
+          </div>
+
+          <div class="total-line">
+            <span>Total to pay</span>
+            <span id="totalPrice">₹0</span>
+          </div>
+
+          <div id="timerCard" class="timer-card hidden">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="8.5"></circle>
+              <path d="M12 7v5l3.4 2"></path>
+            </svg>
+
+            <div class="timer-copy">
+              <span>Complete your order within</span>
+              <span id="countdownTimer" class="timer-value">00d 00h 00m 00s</span>
+            </div>
+          </div>
+
+          <button id="payButton" class="pay-button" type="button">
+            <span id="payButtonText">Complete secure payment</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+          </button>
+
+          <p class="pay-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+              <path d="m9 12 2 2 4-4"></path>
+            </svg>
+            <span>Payments are processed securely by Razorpay.</span>
+          </p>
+
+          <div id="paymentError" class="payment-error"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /*
+      PUBLIC CONFIGURATION ONLY:
+      This Supabase anon key is intended for browser use.
+
+      Never put the Razorpay Key Secret in this HTML file.
+      It belongs only in your Supabase Edge Function secrets.
+    */
+    const SUPABASE_URL = "https://iqjdqtdzpdhuicfheybi.supabase.co";
+
+    const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxamRxdGR6cGRodWljZmhleWJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NDcxNjksImV4cCI6MjEwNDUyMzE2OX0.NL6txgwRDmqSf7w6oqsTrKyW_OfyOn4vS_tyZF_kY1A";
+
+    /*
+      Replace this with your Razorpay Key ID.
+      It is safe to expose the Key ID in the browser.
+
+      Example:
+      const RAZORPAY_KEY_ID = "rzp_live_xxxxxxxxxxxxx";
+    */
+    const RAZORPAY_KEY_ID = "rzp_live_T9R4Pbutl1BSCm";
+
+    /*
+      Supabase Edge Function URLs.
+      These functions are included later in this answer.
+    */
+    const CREATE_PAYMENT_FUNCTION =
+      `${SUPABASE_URL}/functions/v1/create-razorpay-order`;
+
+    const VERIFY_PAYMENT_FUNCTION =
+      `${SUPABASE_URL}/functions/v1/verify-razorpay-payment`;
+
+    const state = {
+      productId: null,
+      product: null,
+      customerName: "",
+      customerEmail: "",
+      coupon: null,
+      discountedAmount: null,
+      timerInterval: null,
+      isPaying: false
+    };
+
+    const elements = {
+      loadingState: document.getElementById("loadingState"),
+      errorState: document.getElementById("errorState"),
+      errorTitle: document.getElementById("errorTitle"),
+      errorMessage: document.getElementById("errorMessage"),
+      checkoutPage: document.getElementById("checkoutPage"),
+
+      checkoutEyebrow: document.getElementById("checkoutEyebrow"),
+      checkoutTitle: document.getElementById("checkoutTitle"),
+      checkoutSubtitle: document.getElementById("checkoutSubtitle"),
+      progressValue: document.getElementById("progressValue"),
+      progressLabelOne: document.getElementById("progressLabelOne"),
+      progressLabelTwo: document.getElementById("progressLabelTwo"),
+
+      stepOne: document.getElementById("stepOne"),
+      stepTwo: document.getElementById("stepTwo"),
+
+      customerForm: document.getElementById("customerForm"),
+      customerName: document.getElementById("customerName"),
+      customerEmail: document.getElementById("customerEmail"),
+      nameError: document.getElementById("nameError"),
+      emailError: document.getElementById("emailError"),
+
+      stepOneImageWrap: document.getElementById("stepOneImageWrap"),
+      stepOneProductName: document.getElementById("stepOneProductName"),
+      stepOneProductPrice: document.getElementById("stepOneProductPrice"),
+
+      backToDetails: document.getElementById("backToDetails"),
+      reviewProductImage: document.getElementById("reviewProductImage"),
+      reviewProductName: document.getElementById("reviewProductName"),
+      reviewProductPrice: document.getElementById("reviewProductPrice"),
+
+      couponCode: document.getElementById("couponCode"),
+      applyCouponButton: document.getElementById("applyCouponButton"),
+      couponMessage: document.getElementById("couponMessage"),
+
+      customerPreview: document.getElementById("customerPreview"),
+      subtotalPrice: document.getElementById("subtotalPrice"),
+      discountRow: document.getElementById("discountRow"),
+      discountLabel: document.getElementById("discountLabel"),
+      discountValue: document.getElementById("discountValue"),
+      totalPrice: document.getElementById("totalPrice"),
+
+      timerCard: document.getElementById("timerCard"),
+      countdownTimer: document.getElementById("countdownTimer"),
+
+      payButton: document.getElementById("payButton"),
+      payButtonText: document.getElementById("payButtonText"),
+      paymentError: document.getElementById("paymentError")
+    };
+
+    function getProductIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("productid");
+      return productId ? productId.trim() : null;
+    }
+
+    function formatINR(value) {
+      const amount = Number(value);
+
+      if (!Number.isFinite(amount)) {
+        return "₹0";
+      }
+
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: Number.isInteger(amount) ? 0 : 2
+      }).format(amount);
+    }
+
+    function parseImages(imagesValue) {
+      if (!imagesValue) return [];
+
+      if (Array.isArray(imagesValue)) {
+        return imagesValue
+          .map((item) => String(item).trim())
+          .filter(Boolean);
+      }
+
+      const raw = String(imagesValue).trim();
+
+      if (!raw) return [];
+
+      try {
+        const parsed = JSON.parse(raw);
+
+        if (Array.isArray(parsed)) {
+          return parsed
+            .map((item) => String(item).trim())
+            .filter(Boolean);
+        }
+
+        if (typeof parsed === "string" && parsed.trim()) {
+          return [parsed.trim()];
+        }
+      } catch (_) {
+        // Continue with comma/newline-separated URL parsing.
+      }
+
+      return raw
+        .split(/[\n,|]+/)
+        .map((url) => url.trim().replace(/^["']|["']$/g, ""))
+        .filter(Boolean);
+    }
+
+    function getFirstImage(product) {
+      return parseImages(product?.images)[0] || "";
+    }
+
+    function showError(title, message) {
+      elements.loadingState.classList.add("hidden");
+      elements.checkoutPage.classList.add("hidden");
+      elements.errorTitle.textContent = title;
+      elements.errorMessage.textContent = message;
+      elements.errorState.classList.remove("hidden");
+    }
+
+    function setPaymentError(message = "") {
+      elements.paymentError.textContent = message;
+      elements.paymentError.classList.toggle("visible", Boolean(message));
+    }
+
+    function setPaying(isPaying) {
+      state.isPaying = isPaying;
+      elements.payButton.disabled = isPaying;
+      elements.payButtonText.textContent = isPaying
+        ? "Preparing secure payment..."
+        : "Complete secure payment";
+    }
+
+    function renderStepOneImage(product) {
+      const imageUrl = getFirstImage(product);
+
+      if (imageUrl) {
+        elements.stepOneImageWrap.innerHTML = `
+          <img
+            class="summary-image"
+            src="${imageUrl}"
+            alt="${escapeHTML(product.name || "Product")}"
+            fetchpriority="high"
+          />
+        `;
+        return;
+      }
+
+      elements.stepOneImageWrap.innerHTML = `
+        <div class="summary-image-placeholder" aria-label="No product image available">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <path d="m21 15-4.5-4.5L7 20"></path>
+          </svg>
+        </div>
+      `;
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function currentTotalAmount() {
+      if (Number.isFinite(state.discountedAmount)) {
+        return state.discountedAmount;
+      }
+
+      return Number(state.product?.actualprice) || 0;
+    }
+
+    function renderOrderPrices() {
+      const originalAmount = Number(state.product?.actualprice) || 0;
+      const finalAmount = currentTotalAmount();
+      const discountAmount = Math.max(0, originalAmount - finalAmount);
+
+      elements.subtotalPrice.textContent = formatINR(originalAmount);
+      elements.totalPrice.textContent = formatINR(finalAmount);
+
+      if (state.coupon && discountAmount > 0) {
+        elements.discountLabel.textContent =
+          `${state.coupon.code} (${state.coupon.percentage}% off)`;
+
+        elements.discountValue.textContent =
+          `− ${formatINR(discountAmount)}`;
+
+        elements.discountRow.classList.remove("hidden");
+      } else {
+        elements.discountRow.classList.add("hidden");
+      }
+    }
+
+    function formatRemainingTime(milliseconds) {
+      if (milliseconds <= 0) {
+        return "Offer ending shortly";
+      }
+
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      return `${String(days).padStart(2, "0")}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+    }
+
+    function startPriceTimer(dateToIncrease) {
+      if (state.timerInterval) {
+        clearInterval(state.timerInterval);
+      }
+
+      if (!dateToIncrease) {
+        elements.timerCard.classList.add("hidden");
+        return;
+      }
+
+      /*
+        Your database type is DATE. The timer expires at midnight at the
+        beginning of the next day in the buyer's local timezone.
+      */
+      const selectedDate = new Date(`${dateToIncrease}T00:00:00`);
+
+      const endTime = new Date(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate() + 1,
+        0,
+        0,
+        0
+      ).getTime();
+
+      if (Number.isNaN(endTime)) {
+        elements.timerCard.classList.add("hidden");
+        return;
+      }
+
+      elements.timerCard.classList.remove("hidden");
+
+      const updateTimer = () => {
+        const remaining = endTime - Date.now();
+
+        if (remaining <= 0) {
+          elements.countdownTimer.textContent = "Price update pending";
+          clearInterval(state.timerInterval);
+          return;
+        }
+
+        elements.countdownTimer.textContent = formatRemainingTime(remaining);
+      };
+
+      updateTimer();
+      state.timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function renderProduct(product) {
+      state.product = product;
+
+      const productName = product.name?.trim() || "Untitled Product";
+      const productPrice = Number(product.actualprice) || 0;
+      const productImage = getFirstImage(product);
+
+      document.title = `Checkout — ${productName} | Solowise India`;
+
+      elements.stepOneProductName.textContent = productName;
+      elements.stepOneProductPrice.textContent = formatINR(productPrice);
+
+      elements.reviewProductName.textContent = productName;
+      elements.reviewProductPrice.textContent = formatINR(productPrice);
+
+      if (productImage) {
+        elements.reviewProductImage.src = productImage;
+        elements.reviewProductImage.alt = productName;
+      } else {
+        elements.reviewProductImage.removeAttribute("src");
+        elements.reviewProductImage.alt = "No product image available";
+      }
+
+      renderStepOneImage(product);
+      renderOrderPrices();
+      startPriceTimer(product.datetoincreaseprice);
+
+      elements.loadingState.classList.add("hidden");
+      elements.checkoutPage.classList.remove("hidden");
+    }
+
+    function showStep(stepNumber) {
+      const isStepTwo = stepNumber === 2;
+
+      elements.stepOne.classList.toggle("hidden", isStepTwo);
+      elements.stepTwo.classList.toggle("hidden", !isStepTwo);
+
+      elements.progressValue.classList.toggle("step-two", isStepTwo);
+      elements.progressLabelOne.classList.toggle("active", !isStepTwo);
+      elements.progressLabelTwo.classList.toggle("active", isStepTwo);
+
+      elements.checkoutEyebrow.textContent = isStepTwo
+        ? "Final review"
+        : "Secure checkout";
+
+      elements.checkoutTitle.textContent = isStepTwo
+        ? "Your order is almost ready."
+        : "A few details, then you’re in.";
+
+      elements.checkoutSubtitle.textContent = isStepTwo
+        ? "Review your order, apply a coupon if you have one, and complete payment securely."
+        : "Complete your details to unlock a fast and protected payment experience.";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+    function validateCustomerForm() {
+      const name = elements.customerName.value.trim();
+      const email = elements.customerEmail.value.trim();
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isNameValid = name.length >= 2;
+      const isEmailValid = emailPattern.test(email);
+
+      elements.customerName.classList.toggle("invalid", !isNameValid);
+      elements.customerEmail.classList.toggle("invalid", !isEmailValid);
+
+      elements.nameError.classList.toggle("visible", !isNameValid);
+      elements.emailError.classList.toggle("visible", !isEmailValid);
+
+      if (!isNameValid || !isEmailValid) {
+        return false;
+      }
+
+      state.customerName = name;
+      state.customerEmail = email;
+      return true;
+    }
+
+    async function applyCoupon() {
+      if (!state.product) return;
+
+      const code = elements.couponCode.value.trim().toUpperCase();
+
+      elements.couponMessage.className = "coupon-message";
+      elements.couponMessage.textContent = "";
+
+      if (!code) {
+        state.coupon = null;
+        state.discountedAmount = null;
+        renderOrderPrices();
+        elements.couponMessage.textContent = "Enter a coupon code first.";
+        elements.couponMessage.classList.add("error");
+        return;
+      }
+
+      elements.applyCouponButton.disabled = true;
+      elements.applyCouponButton.textContent = "Checking";
+
+      try {
+        const endpoint = new URL(`${SUPABASE_URL}/rest/v1/couponcodes`);
+        endpoint.searchParams.set("select", "id,couponcode,expiry,percentage");
+        endpoint.searchParams.set("couponcode", `ilike.${code}`);
+        endpoint.searchParams.set("limit", "1");
+
+        const response = await fetch(endpoint.toString(), {
+          method: "GET",
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Accept: "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Coupon lookup failed.");
+        }
+
+        const coupons = await response.json();
+        const coupon = coupons?.[0];
+
+        if (!coupon) {
+          throw new Error("That coupon code is not valid.");
+        }
+
+        const percentage = Number(coupon.percentage);
+
+        if (!Number.isFinite(percentage) || percentage <= 0 || percentage > 100) {
+          throw new Error("This coupon is not configured correctly.");
+        }
+
+        /*
+          Coupon expiry is treated as valid through the end of its expiry date.
+        */
+        if (coupon.expiry) {
+          const expiryEnd = new Date(`${coupon.expiry}T23:59:59.999`);
+
+          if (Number.isNaN(expiryEnd.getTime()) || Date.now() > expiryEnd.getTime()) {
+            throw new Error("This coupon has expired.");
+          }
+        }
+
+        const originalAmount = Number(state.product.actualprice) || 0;
+        const reducedAmount =
+          Math.round(originalAmount * (1 - percentage / 100) * 100) / 100;
+
+        state.coupon = {
+          id: coupon.id,
+          code: String(coupon.couponcode).toUpperCase(),
+          percentage
+        };
+
+        state.discountedAmount = Math.max(0, reducedAmount);
+
+        elements.couponCode.value = state.coupon.code;
+        elements.couponMessage.textContent =
+          `${percentage}% discount applied successfully.`;
+
+        elements.couponMessage.classList.add("success");
+        renderOrderPrices();
+      } catch (error) {
+        state.coupon = null;
+        state.discountedAmount = null;
+        renderOrderPrices();
+
+        elements.couponMessage.textContent =
+          error.message || "Unable to apply this coupon.";
+
+        elements.couponMessage.classList.add("error");
+      } finally {
+        elements.applyCouponButton.disabled = false;
+        elements.applyCouponButton.textContent = "Apply";
+      }
+    }
+
+    async function createPaymentOrder() {
+      /*
+        Important:
+        Never trust client-calculated prices on the server.
+        The Edge Function below fetches the product and coupon again,
+        calculates the final amount itself, and records the order.
+      */
+      const payload = {
+        productId: Number(state.productId),
+        customerName: state.customerName,
+        customerEmail: state.customerEmail,
+        couponCode: state.coupon?.code || null,
+        clientMetadata: {
+          page_url: window.location.href,
+          referrer: document.referrer || null,
+          user_agent: navigator.userAgent || null,
+          language: navigator.language || null,
+          languages: navigator.languages || [],
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
+          screen_width: window.screen?.width || null,
+          screen_height: window.screen?.height || null,
+          viewport_width: window.innerWidth || null,
+          viewport_height: window.innerHeight || null,
+          platform: navigator.platform || null,
+          device_memory: navigator.deviceMemory || null,
+          hardware_concurrency: navigator.hardwareConcurrency || null
+        }
+      };
+
+      const response = await fetch(CREATE_PAYMENT_FUNCTION, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to create the payment order.");
+      }
+
+      return result;
+    }
+
+    async function verifyPayment(paymentResponse, checkoutData) {
+      const response = await fetch(VERIFY_PAYMENT_FUNCTION, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          orderid: checkoutData.orderid,
+          razorpay_order_id: paymentResponse.razorpay_order_id,
+          razorpay_payment_id: paymentResponse.razorpay_payment_id,
+          razorpay_signature: paymentResponse.razorpay_signature
+        })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.error ||
+          "Your payment was received but could not be verified. Please contact support."
+        );
+      }
+
+      return result;
+    }
+
+    function openRazorpay(checkoutData) {
+      return new Promise((resolve, reject) => {
+        if (typeof Razorpay === "undefined") {
+          reject(new Error("Razorpay checkout could not be loaded. Please refresh and try again."));
+          return;
+        }
+
+        if (
+          !RAZORPAY_KEY_ID ||
+          RAZORPAY_KEY_ID === "YOUR_RAZORPAY_KEY_ID"
+        ) {
+          reject(new Error("Razorpay Key ID is missing. Add your rzp_live_ or rzp_test_ Key ID in checkout.html."));
+          return;
+        }
+
+        const options = {
+          key: RAZORPAY_KEY_ID,
+          amount: checkoutData.amountPaise,
+          currency: "INR",
+          name: "Solowise India",
+          description: checkoutData.productName,
+          image: getFirstImage(state.product) || undefined,
+          order_id: checkoutData.razorpayOrderId,
+          prefill: {
+            name: state.customerName,
+            email: state.customerEmail
+          },
+          notes: {
+            solowise_orderid: checkoutData.orderid,
+            product_id: String(state.productId)
+          },
+          theme: {
+            color: "#171717"
+          },
+          modal: {
+            ondismiss: () => {
+              setPaying(false);
+              setPaymentError(
+                "Payment window closed. Your order is still pending; you can try again when ready."
+              );
+              reject(new Error("Payment window closed."));
+            }
+          },
+          handler: async function (response) {
+            try {
+              const verification = await verifyPayment(response, checkoutData);
+
+              window.location.href =
+                `./thankyou.html?orderid=${encodeURIComponent(
+                  verification.orderid || checkoutData.orderid
+                )}`;
+            } catch (error) {
+              setPaying(false);
+              setPaymentError(
+                error.message ||
+                "Payment verification failed. Please contact support with your payment details."
+              );
+              reject(error);
+            }
+          }
+        };
+
+        const razorpay = new Razorpay(options);
+
+        razorpay.on("payment.failed", function (response) {
+          setPaying(false);
+
+          const reason =
+            response?.error?.description ||
+            "The payment did not complete. Please try another payment method.";
+
+          setPaymentError(reason);
+          reject(new Error(reason));
+        });
+
+        razorpay.open();
+      });
+    }
+
+    async function beginPayment() {
+      if (state.isPaying) return;
+
+      setPaymentError("");
+
+      if (!state.customerName || !state.customerEmail || !state.product) {
+        showStep(1);
+        return;
+      }
+
+      setPaying(true);
+
+      try {
+        const checkoutData = await createPaymentOrder();
+        await openRazorpay(checkoutData);
+      } catch (error) {
+        /*
+          `ondismiss` and `payment.failed` already surface a friendly message.
+          Do not overwrite it unnecessarily.
+        */
+        if (
+          error.message !== "Payment window closed." &&
+          !elements.paymentError.textContent
+        ) {
+          setPaymentError(
+            error.message ||
+            "We could not start the payment. Please try again."
+          );
+        }
+
+        setPaying(false);
+      }
+    }
+
+    async function loadProduct() {
+      const productId = getProductIdFromUrl();
+
+      if (!productId) {
+        showError(
+          "Product ID missing",
+          "Open checkout using checkout.html?productid=YOUR_PRODUCT_ID."
+        );
+        return;
+      }
+
+      if (!/^\d+$/.test(productId)) {
+        showError(
+          "Invalid product ID",
+          "The product identifier in this checkout link is invalid."
+        );
+        return;
+      }
+
+      state.productId = productId;
+
+      try {
+        const endpoint = new URL(`${SUPABASE_URL}/rest/v1/products`);
+        endpoint.searchParams.set(
+          "select",
+          "id,images,name,description,actualprice,strikethrough,datetoincreaseprice"
+        );
+        endpoint.searchParams.set("id", `eq.${productId}`);
+        endpoint.searchParams.set("limit", "1");
+
+        const response = await fetch(endpoint.toString(), {
+          method: "GET",
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Accept: "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Unable to load product.");
+        }
+
+        const products = await response.json();
+
+        if (!Array.isArray(products) || products.length === 0) {
+          showError(
+            "Product not found",
+            "This item may no longer be available."
+          );
+          return;
+        }
+
+        renderProduct(products[0]);
+      } catch (error) {
+        console.error("Product checkout loading error:", error);
+
+        showError(
+          "Checkout unavailable",
+          "We could not load this product right now. Please try again shortly."
+        );
+      }
+    }
+
+    elements.customerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!validateCustomerForm()) {
+        return;
+      }
+
+      const safeName = escapeHTML(state.customerName);
+      const safeEmail = escapeHTML(state.customerEmail);
+
+      elements.customerPreview.innerHTML =
+        `<strong>${safeName}</strong><br>${safeEmail}`;
+
+      showStep(2);
+    });
+
+    elements.customerName.addEventListener("input", () => {
+      elements.customerName.classList.remove("invalid");
+      elements.nameError.classList.remove("visible");
+    });
+
+    elements.customerEmail.addEventListener("input", () => {
+      elements.customerEmail.classList.remove("invalid");
+      elements.emailError.classList.remove("visible");
+    });
+
+    elements.backToDetails.addEventListener("click", () => {
+      showStep(1);
+    });
+
+    elements.applyCouponButton.addEventListener("click", applyCoupon);
+
+    elements.couponCode.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        applyCoupon();
+      }
+    });
+
+    elements.couponCode.addEventListener("input", () => {
+      if (state.coupon) {
+        state.coupon = null;
+        state.discountedAmount = null;
+        renderOrderPrices();
+        elements.couponMessage.textContent =
+          "Coupon changed. Apply it again to update your total.";
+
+        elements.couponMessage.className = "coupon-message";
+      }
+    });
+
+    elements.payButton.addEventListener("click", beginPayment);
+
+    loadProduct();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta
+    name="description"
+    content="Shop premium digital products from Solowise India."
+  />
+  <title>Product — Solowise India</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #f8f8f5;
+      --surface: rgba(255, 255, 255, 0.68);
+      --surface-solid: #ffffff;
+      --surface-soft: #f2f2ec;
+      --text: #131313;
+      --muted: #6d6d67;
+      --border: rgba(19, 19, 19, 0.11);
+      --border-strong: rgba(19, 19, 19, 0.18);
+      --accent: #171717;
+      --accent-text: #ffffff;
+      --danger: #e33b35;
+      --success: #1d8753;
+      --glow: rgba(0, 0, 0, 0.08);
+      --shadow: 0 22px 65px rgba(24, 24, 19, 0.12);
+      --header-bg: rgba(248, 248, 245, 0.72);
+      --button-hover: #30302f;
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0d0e;
+        --surface: rgba(27, 27, 29, 0.72);
+        --surface-solid: #18181a;
+        --surface-soft: #202023;
+        --text: #f4f3ee;
+        --muted: #aaa9a5;
+        --border: rgba(255, 255, 255, 0.12);
+        --border-strong: rgba(255, 255, 255, 0.2);
+        --accent: #f6f5ef;
+        --accent-text: #111112;
+        --danger: #ff625b;
+        --success: #5ee1a0;
+        --glow: rgba(255, 255, 255, 0.08);
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+        --header-bg: rgba(13, 13, 14, 0.75);
+        --button-hover: #ffffff;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 9% 0%, rgba(129, 120, 82, 0.12), transparent 30%),
+        radial-gradient(circle at 95% 15%, rgba(93, 120, 156, 0.11), transparent 32%),
+        var(--bg);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.16;
+      background-image:
+        linear-gradient(rgba(127, 127, 127, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 127, 127, 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      z-index: 50;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      height: 76px;
+      padding: 0 5vw;
+      border-bottom: 1px solid var(--border);
+      background: var(--header-bg);
+      backdrop-filter: blur(18px) saturate(135%);
+      -webkit-backdrop-filter: blur(18px) saturate(135%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.83rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 27px;
+      height: 27px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: var(--accent);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent-text);
+    }
+
+    .brand-mark::before {
+      top: 5px;
+      left: 5px;
+      width: 8px;
+      height: 8px;
+    }
+
+    .brand-mark::after {
+      right: 4px;
+      bottom: 4px;
+      width: 13px;
+      height: 13px;
+      opacity: 0.72;
+    }
+
+    .secure-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 700;
+    }
+
+    .secure-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--success) 12%, transparent);
+    }
+
+    .page-shell {
+      width: min(1420px, 100%);
+      margin: 0 auto;
+      padding: clamp(24px, 4vw, 64px) 5vw 155px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 720;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      transform: translateX(-3px);
+    }
+
+    .back-link svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
+      align-items: start;
+      gap: clamp(34px, 6vw, 104px);
+    }
+
+    .gallery-wrap {
+      min-width: 0;
+    }
+
+    .gallery {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background: var(--surface-soft);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .gallery::after {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    .image-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+      touch-action: pan-x;
+    }
+
+    .image-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-image-slide {
+      position: relative;
+      flex: 0 0 100%;
+      aspect-ratio: 1 / 1;
+      scroll-snap-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.18), transparent 25%),
+        var(--surface-soft);
+    }
+
+    .product-image-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 700ms cubic-bezier(0.2, 0.75, 0.2, 1);
+    }
+
+    @media (hover: hover) and (min-width: 850px) {
+      .product-image-slide:hover img {
+        transform: scale(1.035);
+      }
+    }
+
+    .gallery-placeholder {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      color: var(--muted);
+      background:
+        radial-gradient(circle at 40% 30%, var(--glow), transparent 28%),
+        var(--surface-soft);
+    }
+
+    .gallery-placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.38;
+    }
+
+    .gallery-controls {
+      position: absolute;
+      z-index: 8;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .image-counter {
+      min-width: 56px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 12px;
+      color: #fff;
+      background: rgba(10, 10, 10, 0.48);
+      backdrop-filter: blur(10px);
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .gallery-nav {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 12px;
+      color: #fff;
+      background: rgba(10, 10, 10, 0.48);
+      backdrop-filter: blur(10px);
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .gallery-nav:hover {
+      background: rgba(10, 10, 10, 0.72);
+      transform: translateY(-2px);
+    }
+
+    .gallery-nav:active {
+      transform: translateY(0) scale(0.95);
+    }
+
+    .gallery-nav svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 11px;
+      padding: 16px 2px 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .thumbs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .thumb {
+      position: relative;
+      flex: 0 0 auto;
+      width: 74px;
+      height: 74px;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface-soft);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumb.active {
+      border-color: var(--text);
+      box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--text);
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+    }
+
+    .product-content {
+      position: sticky;
+      top: 108px;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 17px;
+      color: var(--success);
+      font-size: 0.75rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      content: "";
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 5px color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    .product-name {
+      max-width: 700px;
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4.7rem);
+      font-weight: 820;
+      letter-spacing: -0.065em;
+      line-height: 0.96;
+      text-wrap: balance;
+    }
+
+    .pricing-block {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 15px;
+      margin: 30px 0 14px;
+    }
+
+    .actual-price {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      font-weight: 860;
+      letter-spacing: -0.065em;
+      line-height: 1;
+    }
+
+    .old-price {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 680;
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: var(--danger);
+    }
+
+    .saving-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 31px;
+      padding: 6px 10px;
+      border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
+      border-radius: 999px;
+      color: var(--success);
+      background: color-mix(in srgb, var(--success) 9%, transparent);
+      font-size: 0.74rem;
+      font-weight: 850;
+      letter-spacing: 0.02em;
+    }
+
+    .tax-note {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 0.81rem;
+      font-weight: 560;
+    }
+
+    .timer-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px;
+      margin: 0 0 25px;
+      border: 1px solid color-mix(in srgb, var(--danger) 36%, var(--border));
+      border-radius: var(--radius-md);
+      color: var(--danger);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--danger) 11%, transparent), transparent 65%),
+        var(--surface);
+      backdrop-filter: blur(14px);
+    }
+
+    .timer-icon {
+      display: grid;
+      flex: 0 0 auto;
+      width: 39px;
+      height: 39px;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 11%, transparent);
+    }
+
+    .timer-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .timer-copy {
+      display: flex;
+      min-width: 0;
+      flex: 1;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .timer-label {
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 750;
+      line-height: 1.15;
+    }
+
+    .timer-value {
+      overflow: hidden;
+      color: var(--danger);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.96rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .description-wrap {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .description-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 11px;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .description-heading::after {
+      flex: 1;
+      height: 1px;
+      content: "";
+      background: var(--border);
+    }
+
+    .description {
+      max-width: 62ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.78;
+      white-space: pre-line;
+    }
+
+    .badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+      margin-top: 10px;
+    }
+
+    .benefit-badge {
+      min-width: 0;
+      padding: 12px 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      text-align: center;
+      transition: transform 220ms ease, border-color 220ms ease;
+    }
+
+    .benefit-badge:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-3px);
+    }
+
+    .benefit-badge img {
+      display: block;
+      width: min(100%, 66px);
+      aspect-ratio: 1;
+      margin: 0 auto 7px;
+      object-fit: contain;
+    }
+
+    .benefit-badge span {
+      display: block;
+      color: var(--text);
+      font-size: 0.68rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 650;
+    }
+
+    .trust-row svg {
+      width: 17px;
+      height: 17px;
+      color: var(--success);
+    }
+
+    .buy-bar {
+      position: fixed;
+      z-index: 100;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 13px max(5vw, env(safe-area-inset-left))
+        calc(13px + env(safe-area-inset-bottom))
+        max(5vw, env(safe-area-inset-right));
+      border-top: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 78%, transparent);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+    }
+
+    .buy-bar-inner {
+      display: flex;
+      width: min(1080px, 100%);
+      min-height: 54px;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .buy-summary {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .buy-summary-image {
+      width: 44px;
+      height: 44px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface-soft);
+    }
+
+    .buy-summary-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .buy-summary-copy {
+      min-width: 0;
+    }
+
+    .buy-summary-name {
+      max-width: 300px;
+      overflow: hidden;
+      font-size: 0.78rem;
+      font-weight: 760;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .buy-summary-price {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 700;
+    }
+
+    .buy-button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 0 24px;
+      cursor: pointer;
+      border: 0;
+      border-radius: 15px;
+      color: var(--accent-text);
+      background: var(--accent);
+      box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 21%, transparent);
+      font-size: 0.9rem;
+      font-weight: 850;
+      letter-spacing: 0.01em;
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .buy-button:hover {
+      background: var(--button-hover);
+      box-shadow: 0 14px 30px color-mix(in srgb, var(--accent) 28%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .buy-button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .buy-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .loading-screen,
+    .error-screen {
+      display: grid;
+      min-height: calc(100vh - 76px);
+      place-items: center;
+      padding: 40px 5vw 160px;
+    }
+
+    .loading-card,
+    .error-card {
+      width: min(500px, 100%);
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .loader {
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 18px;
+      border: 3px solid var(--border);
+      border-top-color: var(--text);
+      border-radius: 50%;
+      animation: spin 850ms linear infinite;
+    }
+
+    .loading-card h1,
+    .error-card h1 {
+      margin: 0 0 9px;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+    }
+
+    .loading-card p,
+    .error-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+      line-height: 1.6;
+    }
+
+    .retry-button {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 17px;
+      margin-top: 21px;
+      cursor: pointer;
+      border: 0;
+      border-radius: 12px;
+      color: var(--accent-text);
+      background: var(--accent);
+      font-weight: 800;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .product-content {
+        position: static;
+      }
+
+      .product-name {
+        font-size: clamp(2.15rem, 10vw, 4.3rem);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        height: 66px;
+        padding: 0 18px;
+      }
+
+      .secure-top {
+        font-size: 0.7rem;
+      }
+
+      .page-shell {
+        padding: 20px 18px 143px;
+      }
+
+      .back-link {
+        margin-bottom: 19px;
+      }
+
+      .gallery {
+        margin-right: -2px;
+        margin-left: -2px;
+        border-radius: 23px;
+      }
+
+      .gallery-controls {
+        right: 11px;
+        bottom: 11px;
+      }
+
+      .gallery-nav {
+        width: 36px;
+        height: 36px;
+      }
+
+      .image-counter {
+        min-width: 50px;
+        padding: 9px;
+      }
+
+      .thumb {
+        width: 60px;
+        height: 60px;
+        border-radius: 13px;
+      }
+
+      .product-name {
+        letter-spacing: -0.07em;
+      }
+
+      .pricing-block {
+        gap: 9px 11px;
+        margin-top: 23px;
+      }
+
+      .badges {
+        gap: 8px;
+      }
+
+      .benefit-badge {
+        padding: 9px 5px;
+        border-radius: 14px;
+      }
+
+      .benefit-badge img {
+        width: 56px;
+        margin-bottom: 5px;
+      }
+
+      .benefit-badge span {
+        font-size: 0.59rem;
+      }
+
+      .buy-bar {
+        padding: 10px 13px calc(10px + env(safe-area-inset-bottom));
+      }
+
+      .buy-bar-inner {
+        gap: 10px;
+      }
+
+      .buy-summary-image {
+        width: 40px;
+        height: 40px;
+      }
+
+      .buy-summary-name {
+        max-width: 118px;
+        font-size: 0.71rem;
+      }
+
+      .buy-summary-price {
+        font-size: 0.73rem;
+      }
+
+      .buy-button {
+        min-height: 48px;
+        padding: 0 16px;
+        border-radius: 13px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .secure-top {
+        display: none;
+      }
+
+      .buy-summary-name {
+        max-width: 95px;
+      }
+
+      .buy-button {
+        padding: 0 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Solowise India home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Solowise India</span>
+    </a>
+
+    <div class="secure-top">
+      <span class="secure-dot" aria-hidden="true"></span>
+      <span>Secure shopping</span>
+    </div>
+  </header>
+
+  <main id="loadingState" class="loading-screen">
+    <section class="loading-card" aria-live="polite">
+      <div class="loader" aria-hidden="true"></div>
+      <h1>Curating your product</h1>
+      <p>Please wait while we load the Solowise experience.</p>
+    </section>
+  </main>
+
+  <main id="errorState" class="error-screen hidden">
+    <section class="error-card">
+      <h1 id="errorTitle">Product unavailable</h1>
+      <p id="errorMessage">
+        We could not find the product you requested.
+      </p>
+      <a class="retry-button" href="./index.html">Return to store</a>
+    </section>
+  </main>
+
+  <main id="productPage" class="page-shell hidden">
+    <a class="back-link" href="./index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+      <span>Back to store</span>
+    </a>
+
+    <div class="product-layout">
+      <section class="gallery-wrap" aria-label="Product images">
+        <div class="gallery">
+          <div id="imageTrack" class="image-track"></div>
+
+          <div id="galleryControls" class="gallery-controls hidden">
+            <button
+              id="previousImage"
+              class="gallery-nav"
+              type="button"
+              aria-label="Previous product image"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+
+            <div id="imageCounter" class="image-counter">1 / 1</div>
+
+            <button
+              id="nextImage"
+              class="gallery-nav"
+              type="button"
+              aria-label="Next product image"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="thumbnails" class="thumbs hidden" aria-label="Choose product image"></div>
+      </section>
+
+      <section class="product-content">
+        <div class="eyebrow">Digital access · Instant delivery</div>
+
+        <h1 id="productName" class="product-name">Product name</h1>
+
+        <div class="pricing-block">
+          <div id="actualPrice" class="actual-price">₹0</div>
+          <div id="oldPrice" class="old-price hidden">₹0</div>
+          <div id="savingPill" class="saving-pill hidden">Save 0%</div>
+        </div>
+
+        <p class="tax-note">One-time payment · Secure checkout · No hidden fees</p>
+
+        <div id="timerCard" class="timer-card hidden">
+          <div class="timer-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="8.5"></circle>
+              <path d="M12 7v5l3.4 2"></path>
+            </svg>
+          </div>
+
+          <div class="timer-copy">
+            <span class="timer-label">Current price increases in</span>
+            <span id="countdownTimer" class="timer-value">00d 00h 00m 00s</span>
+          </div>
+        </div>
+
+        <div class="description-wrap">
+          <h2 class="description-heading">About this product</h2>
+          <p id="productDescription" class="description"></p>
+        </div>
+
+        <div class="badges" aria-label="Purchase benefits">
+          <div class="benefit-badge">
+            <picture>
+              <source
+                media="(prefers-color-scheme: dark)"
+                srcset="https://marqueein.s3.ap-south-1.amazonaws.com/4.png"
+              />
+              <img
+                src="https://marqueein.s3.ap-south-1.amazonaws.com/1.png"
+                alt="Instant delivery"
+                loading="lazy"
+              />
+            </picture>
+            <span>Instant delivery</span>
+          </div>
+
+          <div class="benefit-badge">
+            <picture>
+              <source
+                media="(prefers-color-scheme: dark)"
+                srcset="https://marqueein.s3.ap-south-1.amazonaws.com/5.png"
+              />
+              <img
+                src="https://marqueein.s3.ap-south-1.amazonaws.com/2.png"
+                alt="Secure checkout"
+                loading="lazy"
+              />
+            </picture>
+            <span>Secure checkout</span>
+          </div>
+
+          <div class="benefit-badge">
+            <picture>
+              <source
+                media="(prefers-color-scheme: dark)"
+                srcset="https://marqueein.s3.ap-south-1.amazonaws.com/6.png"
+              />
+              <img
+                src="https://marqueein.s3.ap-south-1.amazonaws.com/3.png"
+                alt="Money back guarantee"
+                loading="lazy"
+              />
+            </picture>
+            <span>Money-back guarantee</span>
+          </div>
+        </div>
+
+        <div class="trust-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <span>Protected payment experience by Solowise India</span>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <aside id="buyBar" class="buy-bar hidden" aria-label="Product checkout">
+    <div class="buy-bar-inner">
+      <div class="buy-summary">
+        <div class="buy-summary-image">
+          <img
+            id="buyImage"
+            src=""
+            alt=""
+          />
+        </div>
+
+        <div class="buy-summary-copy">
+          <div id="buyProductName" class="buy-summary-name">Product</div>
+          <div id="buyPrice" class="buy-summary-price">₹0</div>
+        </div>
+      </div>
+
+      <button id="buyNowButton" class="buy-button" type="button">
+        <span>Buy now</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <script>
+    const SUPABASE_URL = "https://iqjdqtdzpdhuicfheybi.supabase.co";
+    const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxamRxdGR6cGRodWljZmhleWJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NDcxNjksImV4cCI6MjEwNDUyMzE2OX0.NL6txgwRDmqSf7w6oqsTrKyW_OfyOn4vS_tyZF_kY1A";
+
+    const state = {
+      productId: null,
+      images: [],
+      activeImage: 0,
+      countdownInterval: null
+    };
+
+    const elements = {
+      loadingState: document.getElementById("loadingState"),
+      errorState: document.getElementById("errorState"),
+      errorTitle: document.getElementById("errorTitle"),
+      errorMessage: document.getElementById("errorMessage"),
+      productPage: document.getElementById("productPage"),
+      productName: document.getElementById("productName"),
+      productDescription: document.getElementById("productDescription"),
+      actualPrice: document.getElementById("actualPrice"),
+      oldPrice: document.getElementById("oldPrice"),
+      savingPill: document.getElementById("savingPill"),
+      timerCard: document.getElementById("timerCard"),
+      countdownTimer: document.getElementById("countdownTimer"),
+      imageTrack: document.getElementById("imageTrack"),
+      thumbnails: document.getElementById("thumbnails"),
+      galleryControls: document.getElementById("galleryControls"),
+      imageCounter: document.getElementById("imageCounter"),
+      previousImage: document.getElementById("previousImage"),
+      nextImage: document.getElementById("nextImage"),
+      buyBar: document.getElementById("buyBar"),
+      buyImage: document.getElementById("buyImage"),
+      buyProductName: document.getElementById("buyProductName"),
+      buyPrice: document.getElementById("buyPrice"),
+      buyNowButton: document.getElementById("buyNowButton")
+    };
+
+    function getProductIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const queryProductId = params.get("productid");
+
+      if (queryProductId) {
+        return queryProductId.trim();
+      }
+
+      const pathParts = window.location.pathname
+        .split("/")
+        .filter(Boolean);
+
+      const productHtmlIndex = pathParts.findIndex(
+        (part) => part.toLowerCase() === "product.html"
+      );
+
+      if (
+        productHtmlIndex !== -1 &&
+        pathParts[productHtmlIndex + 1]
+      ) {
+        return decodeURIComponent(pathParts[productHtmlIndex + 1]).trim();
+      }
+
+      return null;
+    }
+
+    function formatINR(value) {
+      const numericValue = Number(value);
+
+      if (!Number.isFinite(numericValue)) {
+        return "₹0";
+      }
+
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: Number.isInteger(numericValue) ? 0 : 2
+      }).format(numericValue);
+    }
+
+    function parseImages(imagesValue) {
+      if (!imagesValue) return [];
+
+      if (Array.isArray(imagesValue)) {
+        return imagesValue.filter(Boolean).map((item) => String(item).trim());
+      }
+
+      const rawValue = String(imagesValue).trim();
+
+      if (!rawValue) return [];
+
+      try {
+        const parsed = JSON.parse(rawValue);
+
+        if (Array.isArray(parsed)) {
+          return parsed
+            .filter(Boolean)
+            .map((item) => String(item).trim())
+            .filter(Boolean);
+        }
+
+        if (typeof parsed === "string") {
+          return [parsed.trim()].filter(Boolean);
+        }
+      } catch (_) {
+        // The field is likely a normal URL, comma-separated, or newline-separated list.
+      }
+
+      return rawValue
+        .split(/[\n,|]+/)
+        .map((url) => url.trim().replace(/^["']|["']$/g, ""))
+        .filter(Boolean);
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showError(title, message) {
+      elements.loadingState.classList.add("hidden");
+      elements.productPage.classList.add("hidden");
+      elements.buyBar.classList.add("hidden");
+      elements.errorTitle.textContent = title;
+      elements.errorMessage.textContent = message;
+      elements.errorState.classList.remove("hidden");
+    }
+
+    function setupGallery(images, productName) {
+      state.images = images;
+      state.activeImage = 0;
+
+      elements.imageTrack.innerHTML = "";
+      elements.thumbnails.innerHTML = "";
+
+      if (!images.length) {
+        elements.imageTrack.innerHTML = `
+          <div class="gallery-placeholder" aria-label="No product image available">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+              <rect x="3" y="3" width="18" height="18" rx="3"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <path d="m21 15-4.5-4.5L7 20"></path>
+            </svg>
+          </div>
+        `;
+        elements.galleryControls.classList.add("hidden");
+        elements.thumbnails.classList.add("hidden");
+        elements.buyImage.src = "";
+        elements.buyImage.alt = "";
+        return;
+      }
+
+      images.forEach((imageUrl, index) => {
+        const slide = document.createElement("div");
+        slide.className = "product-image-slide";
+        slide.innerHTML = `
+          <img
+            src="${escapeHTML(imageUrl)}"
+            alt="${escapeHTML(productName)} — image ${index + 1}"
+            ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
+          />
+        `;
+        elements.imageTrack.appendChild(slide);
+
+        const thumb = document.createElement("button");
+        thumb.type = "button";
+        thumb.className = `thumb ${index === 0 ? "active" : ""}`;
+        thumb.setAttribute("aria-label", `View image ${index + 1}`);
+        thumb.innerHTML = `
+          <img
+            src="${escapeHTML(imageUrl)}"
+            alt=""
+            loading="lazy"
+          />
+        `;
+        thumb.addEventListener("click", () => scrollToImage(index));
+        elements.thumbnails.appendChild(thumb);
+      });
+
+      elements.buyImage.src = images[0];
+      elements.buyImage.alt = productName;
+
+      if (images.length > 1) {
+        elements.galleryControls.classList.remove("hidden");
+        elements.thumbnails.classList.remove("hidden");
+        updateGalleryUI();
+      } else {
+        elements.galleryControls.classList.add("hidden");
+        elements.thumbnails.classList.add("hidden");
+      }
+
+      elements.imageTrack.addEventListener(
+        "scroll",
+        () => {
+          const width = elements.imageTrack.clientWidth;
+          if (!width || state.images.length < 2) return;
+
+          const nextIndex = Math.round(elements.imageTrack.scrollLeft / width);
+
+          if (nextIndex !== state.activeImage) {
+            state.activeImage = Math.max(
+              0,
+              Math.min(nextIndex, state.images.length - 1)
+            );
+            updateGalleryUI();
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    function updateGalleryUI() {
+      elements.imageCounter.textContent = `${state.activeImage + 1} / ${state.images.length}`;
+
+      [...elements.thumbnails.children].forEach((thumbnail, index) => {
+        thumbnail.classList.toggle("active", index === state.activeImage);
+      });
+    }
+
+    function scrollToImage(index) {
+      if (!state.images.length) return;
+
+      const normalizedIndex =
+        (index + state.images.length) % state.images.length;
+
+      elements.imageTrack.scrollTo({
+        left: normalizedIndex * elements.imageTrack.clientWidth,
+        behavior: "smooth"
+      });
+
+      state.activeImage = normalizedIndex;
+      updateGalleryUI();
+    }
+
+    function formatRemainingTime(milliseconds) {
+      if (milliseconds <= 0) return "Offer ending shortly";
+
+      const totalSeconds = Math.floor(milliseconds / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      return `${String(days).padStart(2, "0")}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+    }
+
+    function startPriceTimer(dateToIncrease) {
+      if (state.countdownInterval) {
+        clearInterval(state.countdownInterval);
+      }
+
+      if (!dateToIncrease) {
+        elements.timerCard.classList.add("hidden");
+        return;
+      }
+
+      /*
+        Supabase date values are YYYY-MM-DD.
+        Price increase is treated as beginning at midnight at the start
+        of the following day in the visitor's local timezone.
+      */
+      const parsedDate = new Date(`${dateToIncrease}T00:00:00`);
+      const endTime = new Date(
+        parsedDate.getFullYear(),
+        parsedDate.getMonth(),
+        parsedDate.getDate() + 1,
+        0,
+        0,
+        0
+      ).getTime();
+
+      if (Number.isNaN(endTime)) {
+        elements.timerCard.classList.add("hidden");
+        return;
+      }
+
+      elements.timerCard.classList.remove("hidden");
+
+      const updateTimer = () => {
+        const remaining = endTime - Date.now();
+
+        if (remaining <= 0) {
+          elements.countdownTimer.textContent = "Price update pending";
+          clearInterval(state.countdownInterval);
+          return;
+        }
+
+        elements.countdownTimer.textContent = formatRemainingTime(remaining);
+      };
+
+      updateTimer();
+      state.countdownInterval = setInterval(updateTimer, 1000);
+    }
+
+    function renderProduct(product) {
+      const name = product.name?.trim() || "Untitled Product";
+      const description =
+        product.description?.trim() ||
+        "A premium Solowise India product designed for a simple and seamless experience.";
+
+      const actualPrice = Number(product.actualprice);
+      const oldPrice = Number(product.strikethrough);
+      const hasActualPrice = Number.isFinite(actualPrice);
+      const hasOldPrice =
+        Number.isFinite(oldPrice) &&
+        oldPrice > 0 &&
+        (!hasActualPrice || oldPrice > actualPrice);
+
+      document.title = `${name} — Solowise India`;
+
+      elements.productName.textContent = name;
+      elements.productDescription.textContent = description;
+      elements.actualPrice.textContent = formatINR(actualPrice);
+      elements.buyProductName.textContent = name;
+      elements.buyPrice.textContent = formatINR(actualPrice);
+
+      if (hasOldPrice) {
+        const savingPercent = Math.round(
+          ((oldPrice - actualPrice) / oldPrice) * 100
+        );
+
+        elements.oldPrice.textContent = formatINR(oldPrice);
+        elements.oldPrice.classList.remove("hidden");
+
+        if (savingPercent > 0) {
+          elements.savingPill.textContent = `Save ${savingPercent}%`;
+          elements.savingPill.classList.remove("hidden");
+        }
+      } else {
+        elements.oldPrice.classList.add("hidden");
+        elements.savingPill.classList.add("hidden");
+      }
+
+      setupGallery(parseImages(product.images), name);
+      startPriceTimer(product.datetoincreaseprice);
+
+      elements.loadingState.classList.add("hidden");
+      elements.errorState.classList.add("hidden");
+      elements.productPage.classList.remove("hidden");
+      elements.buyBar.classList.remove("hidden");
+    }
+
+    async function loadProduct() {
+      const productId = getProductIdFromUrl();
+
+      if (!productId) {
+        showError(
+          "Product ID missing",
+          "Open this page using product.html?productid=YOUR_PRODUCT_ID."
+        );
+        return;
+      }
+
+      if (!/^\d+$/.test(productId)) {
+        showError(
+          "Invalid product ID",
+          "The requested product identifier is not valid."
+        );
+        return;
+      }
+
+      state.productId = productId;
+
+      try {
+        const endpoint = new URL(`${SUPABASE_URL}/rest/v1/products`);
+        endpoint.searchParams.set(
+          "select",
+          "id,images,name,description,actualprice,strikethrough,datetoincreaseprice"
+        );
+        endpoint.searchParams.set("id", `eq.${productId}`);
+        endpoint.searchParams.set("limit", "1");
+
+        const response = await fetch(endpoint.toString(), {
+          method: "GET",
+          headers: {
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Accept: "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(errorText || "Could not connect to Supabase.");
+        }
+
+        const products = await response.json();
+
+        if (!Array.isArray(products) || products.length === 0) {
+          showError(
+            "Product not found",
+            "This item may have been removed or the link may be incorrect."
+          );
+          return;
+        }
+
+        renderProduct(products[0]);
+      } catch (error) {
+        console.error("Supabase product loading error:", error);
+        showError(
+          "Unable to load this product",
+          "Please check your internet connection and try again."
+        );
+      }
+    }
+
+    elements.previousImage.addEventListener("click", () => {
+      scrollToImage(state.activeImage - 1);
+    });
+
+    elements.nextImage.addEventListener("click", () => {
+      scrollToImage(state.activeImage + 1);
+    });
+
+    elements.buyNowButton.addEventListener("click", () => {
+      if (!state.productId) return;
+
+      window.location.href = `./checkout.html?productid=${encodeURIComponent(
+        state.productId
+      )}`;
+    });
+
+    loadProduct();
+  </script>
+</body>
+</html>
