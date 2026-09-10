@@ -1,0 +1,3911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta
+    name="description"
+    content="The 2026 Freelancer Playbook — Learn how to find clients, pitch confidently, use AI strategically, and close better-paying projects."
+  />
+  <meta name="theme-color" content="#0d0f0e" />
+
+  <title>The 2026 Freelancer Playbook — Solowise India</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+
+      --bg: #f1f0e9;
+      --bg-deep: #e8e6dc;
+      --paper: #fbfaf5;
+      --surface: rgba(255, 255, 255, 0.62);
+      --surface-heavy: rgba(255, 255, 255, 0.83);
+      --text: #111412;
+      --muted: #646962;
+      --faint: #91958e;
+      --line: rgba(17, 20, 18, 0.13);
+      --line-strong: rgba(17, 20, 18, 0.23);
+
+      --ink: #111412;
+      --ink-text: #f7f6ee;
+      --lime: #c7ff4a;
+      --lime-dark: #284000;
+      --orange: #ff6f3d;
+      --red: #e94840;
+      --blue: #98b8ff;
+      --success: #1d8b58;
+
+      --header-bg: rgba(241, 240, 233, 0.73);
+      --shadow-soft: 0 18px 55px rgba(20, 26, 20, 0.09);
+      --shadow-large: 0 38px 100px rgba(20, 26, 20, 0.16);
+
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 17px;
+      --radius-sm: 13px;
+
+      --page-padding: clamp(18px, 5vw, 76px);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d0f0e;
+        --bg-deep: #141714;
+        --paper: #171a18;
+        --surface: rgba(29, 33, 30, 0.62);
+        --surface-heavy: rgba(28, 31, 29, 0.86);
+        --text: #f4f3eb;
+        --muted: #b0b3aa;
+        --faint: #757b73;
+        --line: rgba(255, 255, 255, 0.13);
+        --line-strong: rgba(255, 255, 255, 0.24);
+
+        --ink: #f4f3eb;
+        --ink-text: #101211;
+        --lime: #c7ff4a;
+        --lime-dark: #203300;
+        --orange: #ff7a4a;
+        --red: #ff665f;
+        --blue: #acc5ff;
+        --success: #62df9f;
+
+        --header-bg: rgba(13, 15, 14, 0.73);
+        --shadow-soft: 0 18px 55px rgba(0, 0, 0, 0.25);
+        --shadow-large: 0 40px 110px rgba(0, 0, 0, 0.43);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 9% 1%, color-mix(in srgb, var(--lime) 13%, transparent), transparent 27%),
+        radial-gradient(circle at 93% 13%, color-mix(in srgb, var(--blue) 15%, transparent), transparent 30%),
+        var(--bg);
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -3;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: 0.16;
+      background-image:
+        linear-gradient(rgba(127, 127, 127, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(127, 127, 127, 0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+    }
+
+    body::after {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body::after {
+        mix-blend-mode: screen;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+      color: #101211;
+      background: var(--lime);
+    }
+
+    .site-header {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      display: flex;
+      height: 76px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 0 var(--page-padding);
+      border-bottom: 1px solid var(--line);
+      background: var(--header-bg);
+      backdrop-filter: blur(20px) saturate(145%);
+      -webkit-backdrop-filter: blur(20px) saturate(145%);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 860;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      overflow: hidden;
+      border-radius: 9px;
+      background: var(--ink);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      position: absolute;
+      border-radius: 50%;
+      content: "";
+      background: var(--ink-text);
+    }
+
+    .brand-mark::before {
+      top: 5px;
+      left: 5px;
+      width: 8px;
+      height: 8px;
+    }
+
+    .brand-mark::after {
+      right: 4px;
+      bottom: 4px;
+      width: 13px;
+      height: 13px;
+      opacity: 0.7;
+    }
+
+    .header-middle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 760;
+    }
+
+    .header-middle::before {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--success) 12%, transparent);
+    }
+
+    .header-cta {
+      display: inline-flex;
+      min-height: 39px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      border-radius: 11px;
+      color: var(--ink-text);
+      background: var(--ink);
+      font-size: 0.75rem;
+      font-weight: 850;
+      transition:
+        transform 180ms ease,
+        opacity 180ms ease;
+    }
+
+    .header-cta:hover {
+      opacity: 0.83;
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: min(900px, calc(100svh - 76px));
+      grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+      gap: clamp(32px, 6vw, 110px);
+      align-items: center;
+      overflow: hidden;
+      padding: clamp(48px, 8vw, 120px) var(--page-padding) clamp(70px, 8vw, 108px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      top: -150px;
+      right: -150px;
+      width: min(55vw, 760px);
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid color-mix(in srgb, var(--lime) 38%, transparent);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--lime) 31%, transparent), transparent 24%),
+        radial-gradient(circle at 63% 68%, color-mix(in srgb, var(--orange) 20%, transparent), transparent 42%);
+      filter: blur(2px);
+      opacity: 0.76;
+      animation: orbitalDrift 12s ease-in-out infinite;
+    }
+
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      bottom: -120px;
+      left: -120px;
+      width: min(35vw, 480px);
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid color-mix(in srgb, var(--blue) 35%, transparent);
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--blue) 10%, transparent);
+      filter: blur(8px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 920px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 25px;
+      color: var(--success);
+      font-size: 0.76rem;
+      font-weight: 860;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero-label::before {
+      width: 9px;
+      height: 9px;
+      content: "";
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 5px color-mix(in srgb, currentColor 12%, transparent);
+    }
+
+    .hero-title {
+      max-width: 930px;
+      margin: 0;
+      font-size: clamp(3.25rem, 7.8vw, 8.5rem);
+      font-weight: 880;
+      letter-spacing: -0.088em;
+      line-height: 0.84;
+      text-wrap: balance;
+    }
+
+    .hero-title .accent {
+      position: relative;
+      display: inline-block;
+      color: var(--lime-dark);
+      -webkit-text-stroke: 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .hero-title .accent {
+        color: var(--lime);
+      }
+    }
+
+    .hero-subtitle {
+      max-width: 625px;
+      margin: 30px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.8vw, 1.24rem);
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .hero-no-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px 12px;
+      margin: 22px 0 0;
+      color: var(--faint);
+      font-size: 0.82rem;
+      font-weight: 650;
+    }
+
+    .hero-no-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-no-list span::before {
+      width: 4px;
+      height: 4px;
+      content: "";
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .main-button {
+      display: inline-flex;
+      min-height: 58px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 0 23px;
+      border-radius: 16px;
+      color: #101211;
+      background: var(--lime);
+      box-shadow: 0 15px 35px color-mix(in srgb, var(--lime) 23%, transparent);
+      font-size: 0.88rem;
+      font-weight: 880;
+      letter-spacing: 0.01em;
+      transition:
+        transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        box-shadow 200ms ease;
+    }
+
+    .main-button:hover {
+      box-shadow: 0 20px 45px color-mix(in srgb, var(--lime) 31%, transparent);
+      transform: translateY(-3px);
+    }
+
+    .main-button:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .main-button svg {
+      width: 19px;
+      height: 19px;
+      transition: transform 200ms ease;
+    }
+
+    .main-button:hover svg {
+      transform: translateX(4px);
+    }
+
+    .hero-access {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.77rem;
+      font-weight: 690;
+    }
+
+    .hero-access svg {
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      min-height: 560px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .document-cover {
+      position: relative;
+      width: min(100%, 440px);
+      aspect-ratio: 0.72 / 1;
+      overflow: hidden;
+      padding: clamp(25px, 3vw, 37px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      color: #f5f4ec;
+      background:
+        radial-gradient(circle at 85% 13%, rgba(199, 255, 74, 0.38), transparent 19%),
+        radial-gradient(circle at 17% 85%, rgba(124, 152, 255, 0.31), transparent 29%),
+        linear-gradient(145deg, #111512, #202820 55%, #111512);
+      box-shadow:
+        -20px 30px 0 color-mix(in srgb, var(--orange) 68%, transparent),
+        0 38px 85px rgba(0, 0, 0, 0.28);
+      transform: rotate(5deg);
+      transition: transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-visual:hover .document-cover {
+      transform: rotate(1deg) translateY(-10px);
+    }
+
+    .document-cover::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+      background-size: 25px 25px;
+    }
+
+    .cover-top,
+    .cover-middle,
+    .cover-bottom {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.61rem;
+      font-weight: 830;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .cover-number {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 50%;
+      color: #131613;
+      background: var(--lime);
+      font-size: 0.72rem;
+    }
+
+    .cover-middle {
+      margin-top: clamp(52px, 7vw, 85px);
+    }
+
+    .cover-year {
+      margin-bottom: 10px;
+      color: var(--lime);
+      font-size: clamp(0.8rem, 1.7vw, 1rem);
+      font-weight: 860;
+      letter-spacing: 0.19em;
+    }
+
+    .cover-title {
+      margin: 0;
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      font-weight: 880;
+      letter-spacing: -0.09em;
+      line-height: 0.82;
+    }
+
+    .cover-title span {
+      display: block;
+      color: var(--lime);
+    }
+
+    .cover-bottom {
+      position: absolute;
+      right: clamp(25px, 3vw, 37px);
+      bottom: clamp(25px, 3vw, 37px);
+      left: clamp(25px, 3vw, 37px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .cover-bottom-copy {
+      max-width: 190px;
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 0.67rem;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .cover-price {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 870;
+      letter-spacing: -0.07em;
+    }
+
+    .visual-stamp {
+      position: absolute;
+      top: 8%;
+      left: -17px;
+      display: flex;
+      width: 125px;
+      aspect-ratio: 1;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #111412;
+      background: var(--lime);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.67rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.15;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(-15deg);
+      animation: stampPulse 4s ease-in-out infinite;
+    }
+
+    .visual-stamp::before {
+      position: absolute;
+      inset: 7px;
+      content: "";
+      border: 1px dashed rgba(17, 20, 18, 0.4);
+      border-radius: inherit;
+    }
+
+    .hero-price-panel {
+      position: absolute;
+      right: -22px;
+      bottom: 7%;
+      width: 200px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface-heavy);
+      box-shadow: var(--shadow-large);
+      backdrop-filter: blur(16px);
+      transform: rotate(-5deg);
+    }
+
+    .hero-price-panel small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 0.62rem;
+      font-weight: 830;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-price-panel strong {
+      display: block;
+      font-size: 2.05rem;
+      font-weight: 880;
+      letter-spacing: -0.08em;
+      line-height: 1;
+    }
+
+    .hero-price-panel span {
+      display: block;
+      margin-top: 7px;
+      color: var(--success);
+      font-size: 0.72rem;
+      font-weight: 760;
+    }
+
+    .ticker {
+      display: flex;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-text);
+      background: var(--ink);
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerSlide 30s linear infinite;
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 22px;
+      padding: 17px 22px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .ticker-item::after {
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: var(--lime);
+    }
+
+    .section {
+      position: relative;
+      padding: clamp(80px, 11vw, 170px) var(--page-padding);
+    }
+
+    .section-divider {
+      width: calc(100% - (var(--page-padding) * 2));
+      height: 1px;
+      margin: 0 auto;
+      background: var(--line);
+    }
+
+    .section-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 840;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker .number {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 0.66rem;
+      letter-spacing: 0;
+    }
+
+    .display-title {
+      max-width: 1050px;
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 6.7rem);
+      font-weight: 870;
+      letter-spacing: -0.085em;
+      line-height: 0.88;
+      text-wrap: balance;
+    }
+
+    .display-title .highlight {
+      color: var(--orange);
+    }
+
+    .display-title .lime-text {
+      color: var(--lime-dark);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .display-title .lime-text {
+        color: var(--lime);
+      }
+    }
+
+    .lead-copy {
+      max-width: 650px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .problem-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.88fr);
+      gap: clamp(35px, 8vw, 150px);
+      align-items: start;
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 0;
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+    }
+
+    .problem-list-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 15px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      font-weight: 720;
+      letter-spacing: -0.035em;
+    }
+
+    .problem-list-item span:first-child {
+      color: var(--orange);
+      font-size: 0.74rem;
+      font-weight: 830;
+      letter-spacing: 0.05em;
+    }
+
+    .problem-quote-card {
+      position: sticky;
+      top: 112px;
+      padding: clamp(25px, 4vw, 43px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--orange) 15%, transparent), transparent 30%),
+        var(--surface);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+    }
+
+    .problem-quote-card::after {
+      position: absolute;
+      right: -18px;
+      bottom: -70px;
+      color: color-mix(in srgb, var(--orange) 25%, transparent);
+      content: "“";
+      font-family: Georgia, serif;
+      font-size: 22rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .quote-label {
+      position: relative;
+      z-index: 1;
+      color: var(--orange);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .problem-quote-card blockquote {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0;
+      font-size: clamp(1.75rem, 3.3vw, 3.2rem);
+      font-weight: 830;
+      letter-spacing: -0.06em;
+      line-height: 0.98;
+    }
+
+    .problem-quote-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .narrative {
+      max-width: 1030px;
+    }
+
+    .narrative p {
+      max-width: 740px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 1.77;
+    }
+
+    .advice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      max-width: 850px;
+      margin-top: 41px;
+    }
+
+    .advice-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 670;
+      line-height: 1.45;
+    }
+
+    .advice-card q {
+      color: var(--text);
+      font-weight: 760;
+    }
+
+    .big-idea {
+      overflow: hidden;
+      color: #f7f6ee;
+      background:
+        radial-gradient(circle at 90% 5%, rgba(199, 255, 74, 0.21), transparent 31%),
+        radial-gradient(circle at 10% 90%, rgba(255, 111, 61, 0.22), transparent 35%),
+        #111512;
+    }
+
+    .big-idea::before {
+      position: absolute;
+      top: -250px;
+      right: -180px;
+      width: 690px;
+      height: 690px;
+      content: "";
+      border: 1px solid rgba(199, 255, 74, 0.23);
+      border-radius: 50%;
+    }
+
+    .big-idea .section-kicker {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .big-idea .section-kicker .number {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .big-idea .display-title {
+      color: #fff;
+    }
+
+    .big-idea .display-title .lime-text {
+      color: var(--lime);
+    }
+
+    .game-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(15px, 3vw, 28px);
+      margin-top: clamp(38px, 6vw, 74px);
+    }
+
+    .game-card {
+      min-height: 380px;
+      padding: clamp(25px, 4vw, 45px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.055);
+      backdrop-filter: blur(16px);
+      transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .game-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .game-card.game-two {
+      border-color: rgba(199, 255, 74, 0.45);
+      background:
+        linear-gradient(145deg, rgba(199, 255, 74, 0.14), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.055);
+    }
+
+    .game-number {
+      color: var(--lime);
+      font-size: 0.72rem;
+      font-weight: 850;
+      letter-spacing: 0.15em;
+    }
+
+    .game-card h3 {
+      max-width: 430px;
+      margin: 25px 0 24px;
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-weight: 850;
+      letter-spacing: -0.065em;
+      line-height: 0.91;
+    }
+
+    .game-card ul {
+      display: grid;
+      gap: 11px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: rgba(255, 255, 255, 0.67);
+      font-size: 0.91rem;
+      font-weight: 620;
+    }
+
+    .game-card li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .game-card li::before {
+      width: 5px;
+      height: 5px;
+      content: "";
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .game-two li {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .game-two li::before {
+      background: var(--lime);
+    }
+
+    .game-note {
+      max-width: 720px;
+      margin: 35px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(1rem, 1.6vw, 1.16rem);
+      line-height: 1.7;
+    }
+
+    .contents-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.55fr);
+      gap: 45px;
+      align-items: end;
+      margin-bottom: clamp(38px, 6vw, 67px);
+    }
+
+    .contents-side-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .feature-list {
+      display: grid;
+      border-top: 1px solid var(--line);
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 120px minmax(200px, 0.7fr) minmax(280px, 1fr);
+      gap: 25px;
+      align-items: start;
+      padding: clamp(25px, 4vw, 48px) 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding 260ms ease, background 260ms ease;
+    }
+
+    .feature-row:hover {
+      padding-right: 15px;
+      padding-left: 15px;
+      background: color-mix(in srgb, var(--surface) 75%, transparent);
+    }
+
+    .feature-index {
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+    }
+
+    .feature-row h3 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.6vw, 2.45rem);
+      font-weight: 840;
+      letter-spacing: -0.06em;
+      line-height: 0.98;
+    }
+
+    .feature-row h3 span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--faint);
+      font-size: 0.63rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .feature-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+      line-height: 1.68;
+    }
+
+    .feature-points {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .feature-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .feature-points li::before {
+      flex: 0 0 auto;
+      margin-top: 3px;
+      color: var(--success);
+      content: "✓";
+      font-weight: 900;
+    }
+
+    .ai-advantage {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 84% 23%, color-mix(in srgb, var(--blue) 24%, transparent), transparent 30%),
+        radial-gradient(circle at 16% 80%, color-mix(in srgb, var(--lime) 17%, transparent), transparent 28%),
+        var(--paper);
+    }
+
+    .ai-advantage::after {
+      position: absolute;
+      top: 8%;
+      right: 8%;
+      width: min(37vw, 450px);
+      aspect-ratio: 1;
+      content: "AI";
+      display: grid;
+      place-items: center;
+      border: 1px solid color-mix(in srgb, var(--blue) 33%, transparent);
+      border-radius: 50%;
+      color: color-mix(in srgb, var(--blue) 20%, transparent);
+      font-size: clamp(8rem, 23vw, 20rem);
+      font-weight: 900;
+      letter-spacing: -0.13em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .ai-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .ai-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 780px;
+      margin-top: 35px;
+    }
+
+    .ai-point {
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      font-size: 0.82rem;
+      font-weight: 760;
+    }
+
+    .experience-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(310px, 1.1fr);
+      gap: clamp(36px, 8vw, 140px);
+      align-items: center;
+    }
+
+    .experience-statement {
+      position: relative;
+      min-height: 460px;
+      padding: clamp(30px, 5vw, 58px);
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      color: #111412;
+      background: var(--lime);
+      box-shadow: var(--shadow-large);
+    }
+
+    .experience-statement::after {
+      position: absolute;
+      right: -30px;
+      bottom: -64px;
+      content: "×";
+      color: rgba(17, 20, 18, 0.12);
+      font-size: 23rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .experience-statement small {
+      position: relative;
+      z-index: 1;
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .experience-statement h3 {
+      position: relative;
+      z-index: 1;
+      max-width: 450px;
+      margin: 26px 0 0;
+      font-size: clamp(2.4rem, 5vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.085em;
+      line-height: 0.84;
+    }
+
+    .experience-statement p {
+      position: absolute;
+      z-index: 1;
+      right: clamp(30px, 5vw, 58px);
+      bottom: clamp(30px, 5vw, 58px);
+      left: clamp(30px, 5vw, 58px);
+      margin: 0;
+      color: rgba(17, 20, 18, 0.73);
+      font-size: 0.92rem;
+      font-weight: 650;
+      line-height: 1.62;
+    }
+
+    .experience-points {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .experience-point {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: clamp(1rem, 1.5vw, 1.18rem);
+      font-weight: 730;
+      letter-spacing: -0.03em;
+    }
+
+    .experience-point::before {
+      display: grid;
+      flex: 0 0 auto;
+      width: 25px;
+      height: 25px;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      color: var(--success);
+      content: "↗";
+      font-size: 0.8rem;
+    }
+
+    .loop-section {
+      background:
+        radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--red) 14%, transparent), transparent 31%),
+        var(--bg-deep);
+    }
+
+    .loop-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1.22fr);
+      gap: clamp(35px, 7vw, 110px);
+      align-items: center;
+    }
+
+    .loop-steps {
+      position: relative;
+      display: grid;
+      gap: 0;
+      max-width: 640px;
+    }
+
+    .loop-steps::before {
+      position: absolute;
+      top: 30px;
+      bottom: 30px;
+      left: 17px;
+      width: 1px;
+      content: "";
+      background: var(--line-strong);
+    }
+
+    .loop-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 35px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 13px 0;
+    }
+
+    .loop-count {
+      display: grid;
+      z-index: 1;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      color: var(--text);
+      background: var(--bg-deep);
+      font-size: 0.67rem;
+      font-weight: 850;
+    }
+
+    .loop-step:last-child .loop-count {
+      border-color: color-mix(in srgb, var(--red) 45%, transparent);
+      color: var(--red);
+    }
+
+    .loop-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      font-weight: 690;
+      letter-spacing: -0.03em;
+    }
+
+    .loop-step.emphasis p {
+      color: var(--text);
+      font-weight: 810;
+    }
+
+    .break-loop-card {
+      padding: clamp(29px, 5vw, 55px);
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--red) 34%, var(--line));
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(140deg, color-mix(in srgb, var(--red) 12%, transparent), transparent 60%),
+        var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .break-loop-card .mini-label {
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 870;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .break-loop-card h3 {
+      max-width: 490px;
+      margin: 20px 0;
+      font-size: clamp(2.5rem, 5vw, 5.3rem);
+      font-weight: 880;
+      letter-spacing: -0.085em;
+      line-height: 0.84;
+    }
+
+    .break-loop-card h3 span {
+      color: var(--red);
+    }
+
+    .break-loop-card p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .reverse-proof {
+      color: #f5f4ec;
+      background:
+        radial-gradient(circle at 74% 15%, rgba(255, 111, 61, 0.22), transparent 30%),
+        #111512;
+    }
+
+    .reverse-proof .section-kicker {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .reverse-proof .section-kicker .number {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .reverse-proof .display-title {
+      color: #fff;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 45px;
+    }
+
+    .proof-card {
+      min-height: 173px;
+      padding: 23px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .proof-card::before {
+      display: block;
+      margin-bottom: 19px;
+      color: var(--lime);
+      content: "✓";
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .proof-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      font-weight: 690;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+    }
+
+    .proof-conclusion {
+      max-width: 760px;
+      margin: 42px 0 0;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      line-height: 1.72;
+    }
+
+    .proof-conclusion strong {
+      color: var(--lime);
+      font-weight: 780;
+    }
+
+    .cost-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cost-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      gap: clamp(35px, 7vw, 110px);
+      align-items: end;
+    }
+
+    .math-card {
+      padding: clamp(26px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(14px);
+    }
+
+    .math-card small {
+      display: block;
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 830;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .math-equation {
+      margin: 0;
+      font-size: clamp(2.15rem, 5vw, 4.4rem);
+      font-weight: 880;
+      letter-spacing: -0.09em;
+      line-height: 0.91;
+    }
+
+    .math-equation span {
+      color: var(--orange);
+    }
+
+    .math-card p {
+      margin: 21px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.66;
+    }
+
+    .cost-question {
+      max-width: 650px;
+      margin-top: 35px;
+      font-size: clamp(1.45rem, 2.8vw, 2.8rem);
+      font-weight: 820;
+      letter-spacing: -0.06em;
+      line-height: 0.98;
+    }
+
+    .audience-section {
+      background: var(--paper);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: clamp(40px, 6vw, 66px);
+    }
+
+    .audience-card {
+      min-height: 235px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      transition:
+        transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 260ms ease;
+    }
+
+    .audience-card:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-6px);
+    }
+
+    .audience-card .audience-index {
+      color: var(--orange);
+      font-size: 0.7rem;
+      font-weight: 860;
+      letter-spacing: 0.12em;
+    }
+
+    .audience-card h3 {
+      margin: 20px 0 9px;
+      font-size: 1.18rem;
+      font-weight: 820;
+      letter-spacing: -0.04em;
+    }
+
+    .audience-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+
+    .not-for-section {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+      gap: clamp(35px, 8vw, 130px);
+      align-items: center;
+    }
+
+    .not-for-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .not-for-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: clamp(0.96rem, 1.55vw, 1.1rem);
+      line-height: 1.5;
+    }
+
+    .not-for-item::before {
+      flex: 0 0 auto;
+      color: var(--red);
+      content: "×";
+      font-size: 1.24rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .execution-card {
+      padding: clamp(27px, 5vw, 51px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--lime) 16%, transparent), transparent 25%),
+        var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .execution-card h3 {
+      max-width: 520px;
+      margin: 0;
+      font-size: clamp(2.1rem, 4.5vw, 4.5rem);
+      font-weight: 870;
+      letter-spacing: -0.08em;
+      line-height: 0.85;
+    }
+
+    .execution-card h3 span {
+      color: var(--lime-dark);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .execution-card h3 span {
+        color: var(--lime);
+      }
+    }
+
+    .execution-card p {
+      max-width: 490px;
+      margin: 25px 0 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.72;
+    }
+
+    .before-after {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 4% 30%, color-mix(in srgb, var(--blue) 14%, transparent), transparent 27%),
+        var(--bg-deep);
+    }
+
+    .before-after-header {
+      max-width: 900px;
+      margin-bottom: 50px;
+    }
+
+    .before-after-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(15px, 3vw, 29px);
+    }
+
+    .mindset-card {
+      padding: clamp(26px, 4vw, 45px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mindset-card.after {
+      border-color: color-mix(in srgb, var(--lime) 38%, var(--line));
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--lime) 12%, transparent), transparent 56%),
+        var(--surface);
+    }
+
+    .mindset-label {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--surface-heavy);
+      font-size: 0.68rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .mindset-card.after .mindset-label {
+      color: var(--lime-dark);
+      background: color-mix(in srgb, var(--lime) 26%, transparent);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .mindset-card.after .mindset-label {
+        color: var(--lime);
+      }
+    }
+
+    .mindset-list {
+      display: grid;
+      gap: 16px;
+      padding: 0;
+      margin: 29px 0 0;
+      list-style: none;
+    }
+
+    .mindset-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: clamp(0.94rem, 1.5vw, 1.08rem);
+      font-weight: 630;
+      line-height: 1.44;
+    }
+
+    .mindset-list li::before {
+      position: absolute;
+      top: 0.25em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      content: "";
+      border-radius: 50%;
+      background: var(--faint);
+    }
+
+    .mindset-card.after .mindset-list li {
+      color: var(--text);
+    }
+
+    .mindset-card.after .mindset-list li::before {
+      background: var(--success);
+    }
+
+    .price-moment {
+      color: #f5f4ec;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(255, 111, 61, 0.25), transparent 29%),
+        radial-gradient(circle at 10% 90%, rgba(199, 255, 74, 0.14), transparent 28%),
+        #111512;
+    }
+
+    .price-moment .section-kicker {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .price-moment .section-kicker .number {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .price-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.66fr);
+      gap: clamp(35px, 7vw, 108px);
+      align-items: center;
+    }
+
+    .price-moment .display-title {
+      color: #fff;
+    }
+
+    .price-moment .lead-copy {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .price-comparison {
+      display: grid;
+      gap: 10px;
+    }
+
+    .comparison-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 17px;
+      padding: 17px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.88rem;
+      font-weight: 650;
+    }
+
+    .comparison-item strong {
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .comparison-item:last-child {
+      padding: 22px;
+      border: 1px solid rgba(199, 255, 74, 0.35);
+      border-radius: 16px;
+      color: #fff;
+      background: rgba(199, 255, 74, 0.11);
+    }
+
+    .comparison-item:last-child strong {
+      color: var(--lime);
+      font-size: 1.8rem;
+      letter-spacing: -0.06em;
+    }
+
+    .offer-section {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: clamp(100px, 14vw, 190px);
+    }
+
+    .offer-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(29px, 6vw, 74px);
+      border: 1px solid var(--line-strong);
+      border-radius: clamp(25px, 4vw, 42px);
+      background:
+        radial-gradient(circle at 96% 5%, color-mix(in srgb, var(--lime) 24%, transparent), transparent 26%),
+        radial-gradient(circle at 2% 100%, color-mix(in srgb, var(--orange) 19%, transparent), transparent 32%),
+        var(--surface-heavy);
+      box-shadow: var(--shadow-large);
+      backdrop-filter: blur(22px);
+    }
+
+    .offer-card::before {
+      position: absolute;
+      top: -35px;
+      right: -10px;
+      color: color-mix(in srgb, var(--text) 5%, transparent);
+      content: "2026";
+      font-size: clamp(7rem, 20vw, 20rem);
+      font-weight: 900;
+      letter-spacing: -0.15em;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .offer-content {
+      position: relative;
+      z-index: 1;
+      max-width: 830px;
+    }
+
+    .offer-label {
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 880;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .offer-card h2 {
+      max-width: 900px;
+      margin: 22px 0 0;
+      font-size: clamp(2.8rem, 7vw, 7.8rem);
+      font-weight: 890;
+      letter-spacing: -0.09em;
+      line-height: 0.83;
+    }
+
+    .offer-card h2 span {
+      color: var(--lime-dark);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .offer-card h2 span {
+        color: var(--lime);
+      }
+    }
+
+    .offer-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 30px;
+      max-width: 860px;
+      padding: 0;
+      margin: 38px 0 0;
+      list-style: none;
+    }
+
+    .offer-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 690;
+      line-height: 1.45;
+    }
+
+    .offer-list li::before {
+      color: var(--success);
+      content: "✓";
+      font-weight: 900;
+    }
+
+    .offer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 25px;
+      margin-top: 46px;
+    }
+
+    .offer-price-wrap small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .offer-price {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .offer-price strong {
+      font-size: clamp(3rem, 5vw, 5.3rem);
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      line-height: 0.8;
+    }
+
+    .offer-price del {
+      color: var(--faint);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration-color: var(--red);
+      text-decoration-thickness: 1.5px;
+    }
+
+    .offer-assurance {
+      flex-basis: 100%;
+      margin: -9px 0 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 640;
+    }
+
+    .urgency {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1.15fr);
+      gap: clamp(35px, 7vw, 115px);
+      align-items: center;
+    }
+
+    .urgency-orb {
+      position: relative;
+      display: grid;
+      width: min(100%, 450px);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid color-mix(in srgb, var(--orange) 40%, transparent);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 45% 40%, color-mix(in srgb, var(--orange) 31%, transparent), transparent 30%),
+        color-mix(in srgb, var(--orange) 8%, transparent);
+      box-shadow: var(--shadow-large);
+    }
+
+    .urgency-orb::before,
+    .urgency-orb::after {
+      position: absolute;
+      content: "";
+      border: 1px solid color-mix(in srgb, var(--orange) 28%, transparent);
+      border-radius: inherit;
+    }
+
+    .urgency-orb::before {
+      inset: 12%;
+    }
+
+    .urgency-orb::after {
+      inset: 25%;
+    }
+
+    .urgency-orb-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 230px;
+      font-size: clamp(2.1rem, 4vw, 4.4rem);
+      font-weight: 890;
+      letter-spacing: -0.09em;
+      line-height: 0.84;
+      text-align: center;
+    }
+
+    .urgency-copy .display-title {
+      max-width: 720px;
+    }
+
+    .urgency-copy p {
+      max-width: 600px;
+      margin: 27px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.72;
+    }
+
+    .launch-offer {
+      padding-top: 0;
+    }
+
+    .launch-banner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 34px;
+      align-items: center;
+      padding: clamp(27px, 5vw, 58px);
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--red) 28%, var(--line));
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 10% 105%, color-mix(in srgb, var(--red) 16%, transparent), transparent 34%),
+        var(--surface);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .launch-banner .alert-label {
+      display: inline-flex;
+      margin-bottom: 17px;
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 880;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .launch-banner h2 {
+      max-width: 810px;
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 4.3rem);
+      font-weight: 870;
+      letter-spacing: -0.08em;
+      line-height: 0.86;
+    }
+
+    .launch-banner h2 span {
+      color: var(--red);
+    }
+
+    .launch-banner p {
+      max-width: 650px;
+      margin: 23px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .launch-price {
+      min-width: 170px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface-heavy);
+      text-align: center;
+    }
+
+    .launch-price small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 0.64rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .launch-price strong {
+      display: block;
+      color: var(--red);
+      font-size: 3.1rem;
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      line-height: 0.85;
+    }
+
+    .launch-price del {
+      display: block;
+      margin-top: 10px;
+      color: var(--faint);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration-color: var(--red);
+    }
+
+    .faq-section {
+      background: var(--paper);
+    }
+
+    .faq-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(270px, 0.53fr);
+      gap: 35px;
+      align-items: end;
+      margin-bottom: 49px;
+    }
+
+    .faq-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 0;
+      cursor: pointer;
+      border: 0;
+      color: var(--text);
+      background: transparent;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      font-weight: 780;
+      letter-spacing: -0.035em;
+      text-align: left;
+    }
+
+    .faq-icon {
+      position: relative;
+      flex: 0 0 auto;
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      transition: transform 230ms ease, background 230ms ease;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 9px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      transition: transform 230ms ease;
+    }
+
+    .faq-item.active .faq-icon {
+      color: var(--lime-dark);
+      background: var(--lime);
+      transform: rotate(180deg);
+    }
+
+    .faq-item.active .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .faq-item.active .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      max-width: 750px;
+      padding: 0 45px 24px 0;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.91rem;
+      line-height: 1.72;
+    }
+
+    .final-cta {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(90px, 13vw, 185px) var(--page-padding) calc(clamp(90px, 13vw, 185px) + 54px);
+      color: #f5f4ec;
+      background:
+        radial-gradient(circle at 78% 20%, rgba(199, 255, 74, 0.21), transparent 29%),
+        radial-gradient(circle at 15% 90%, rgba(255, 111, 61, 0.23), transparent 33%),
+        #111512;
+    }
+
+    .final-cta::before {
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: min(70vw, 850px);
+      aspect-ratio: 1;
+      content: "";
+      border: 1px solid rgba(199, 255, 74, 0.24);
+      border-radius: 50%;
+    }
+
+    .final-cta-content {
+      position: relative;
+      z-index: 1;
+      max-width: 970px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .final-cta .section-kicker {
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    .final-cta .section-kicker .number {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .final-cta h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(3.1rem, 8vw, 8.8rem);
+      font-weight: 890;
+      letter-spacing: -0.095em;
+      line-height: 0.82;
+    }
+
+    .final-cta h2 span {
+      color: var(--lime);
+    }
+
+    .final-cta p {
+      max-width: 710px;
+      margin: 31px auto 0;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.72;
+    }
+
+    .final-product-line {
+      margin-top: 34px;
+      color: var(--lime);
+      font-size: 0.78rem;
+      font-weight: 840;
+      letter-spacing: 0.11em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .final-price {
+      margin: 20px 0 30px;
+      color: #fff;
+      font-size: clamp(3.2rem, 6vw, 5.8rem);
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      line-height: 0.85;
+    }
+
+    .final-cta .main-button {
+      min-width: min(100%, 310px);
+    }
+
+    .final-trust {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.53);
+      font-size: 0.76rem;
+      font-weight: 650;
+    }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px var(--page-padding) calc(28px + 65px);
+      border-top: 1px solid rgba(255, 255, 255, 0.13);
+      color: rgba(255, 255, 255, 0.6);
+      background: #111512;
+      font-size: 0.73rem;
+      font-weight: 650;
+    }
+
+    .site-footer a {
+      color: var(--lime);
+    }
+
+    .floating-buy-bar {
+      position: fixed;
+      z-index: 200;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 11px max(var(--page-padding), env(safe-area-inset-left))
+        calc(11px + env(safe-area-inset-bottom))
+        max(var(--page-padding), env(safe-area-inset-right));
+      border-top: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      transform: translateY(110%);
+      transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .floating-buy-bar.visible {
+      transform: translateY(0);
+    }
+
+    .floating-buy-inner {
+      display: flex;
+      width: min(970px, 100%);
+      min-height: 51px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 17px;
+      margin: 0 auto;
+    }
+
+    .floating-buy-copy {
+      min-width: 0;
+    }
+
+    .floating-buy-title {
+      overflow: hidden;
+      max-width: 430px;
+      font-size: 0.75rem;
+      font-weight: 810;
+      letter-spacing: -0.02em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .floating-buy-price {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.73rem;
+      font-weight: 710;
+    }
+
+    .floating-buy-button {
+      display: inline-flex;
+      min-height: 47px;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border-radius: 13px;
+      color: #101211;
+      background: var(--lime);
+      font-size: 0.81rem;
+      font-weight: 880;
+      transition: transform 180ms ease;
+    }
+
+    .floating-buy-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .floating-buy-button svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 760ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 80ms;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 160ms;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 240ms;
+    }
+
+    @keyframes tickerSlide {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes orbitalDrift {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-30px, 25px) scale(1.06);
+      }
+    }
+
+    @keyframes stampPulse {
+      0%,
+      100% {
+        transform: rotate(-15deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(-11deg) scale(1.04);
+      }
+    }
+
+    @media (max-width: 1020px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr) minmax(310px, 0.65fr);
+      }
+
+      .feature-row {
+        grid-template-columns: 72px minmax(180px, 0.75fr) minmax(250px, 1fr);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-visual {
+        min-height: 490px;
+        margin-top: 12px;
+      }
+
+      .document-cover {
+        width: min(83%, 400px);
+      }
+
+      .problem-layout,
+      .experience-layout,
+      .loop-layout,
+      .cost-layout,
+      .not-for-section,
+      .price-layout,
+      .urgency {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-quote-card {
+        position: static;
+      }
+
+      .contents-header,
+      .faq-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .feature-row {
+        grid-template-columns: 70px 1fr;
+        gap: 16px;
+      }
+
+      .feature-copy {
+        grid-column: 2;
+      }
+
+      .audience-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .launch-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .launch-price {
+        width: min(100%, 230px);
+      }
+
+      .urgency-orb {
+        width: min(100%, 390px);
+      }
+    }
+
+    @media (max-width: 620px) {
+      :root {
+        --page-padding: 18px;
+      }
+
+      .site-header {
+        height: 66px;
+      }
+
+      .header-middle {
+        display: none;
+      }
+
+      .header-cta {
+        min-height: 36px;
+        padding: 0 12px;
+        font-size: 0.7rem;
+      }
+
+      .hero {
+        padding-top: 55px;
+        padding-bottom: 66px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.15rem, 15vw, 5.2rem);
+      }
+
+      .hero-subtitle {
+        margin-top: 24px;
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        margin-top: 28px;
+      }
+
+      .main-button {
+        width: 100%;
+        min-height: 56px;
+      }
+
+      .hero-access {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 405px;
+      }
+
+      .document-cover {
+        width: min(80%, 320px);
+        padding: 25px;
+        box-shadow:
+          -13px 20px 0 color-mix(in srgb, var(--orange) 68%, transparent),
+          0 28px 70px rgba(0, 0, 0, 0.25);
+      }
+
+      .cover-middle {
+        margin-top: 55px;
+      }
+
+      .cover-bottom {
+        right: 25px;
+        bottom: 25px;
+        left: 25px;
+      }
+
+      .visual-stamp {
+        top: 2%;
+        left: 0;
+        width: 97px;
+        font-size: 0.56rem;
+      }
+
+      .hero-price-panel {
+        right: -2px;
+        bottom: 0;
+        width: 158px;
+        padding: 14px;
+      }
+
+      .hero-price-panel strong {
+        font-size: 1.7rem;
+      }
+
+      .ticker-item {
+        padding: 14px 17px;
+        font-size: 0.65rem;
+      }
+
+      .section {
+        padding-top: 76px;
+        padding-bottom: 76px;
+      }
+
+      .display-title {
+        font-size: clamp(2.45rem, 12.5vw, 4.2rem);
+      }
+
+      .lead-copy {
+        margin-top: 22px;
+        font-size: 0.98rem;
+      }
+
+      .advice-grid,
+      .game-grid,
+      .proof-grid,
+      .before-after-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .game-card {
+        min-height: 320px;
+      }
+
+      .feature-row {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .feature-copy {
+        grid-column: auto;
+      }
+
+      .feature-row:hover {
+        padding-right: 0;
+        padding-left: 0;
+        background: transparent;
+      }
+
+      .feature-row h3 {
+        font-size: 1.9rem;
+      }
+
+      .ai-advantage::after {
+        top: 4%;
+        right: -8%;
+        font-size: 10rem;
+      }
+
+      .experience-statement {
+        min-height: 390px;
+      }
+
+      .audience-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .audience-card {
+        min-height: auto;
+      }
+
+      .offer-list {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-bottom {
+        display: block;
+      }
+
+      .offer-bottom .main-button {
+        margin-top: 28px;
+      }
+
+      .offer-assurance {
+        margin-top: 17px;
+      }
+
+      .floating-buy-title {
+        max-width: 155px;
+        font-size: 0.69rem;
+      }
+
+      .floating-buy-price {
+        font-size: 0.69rem;
+      }
+
+      .floating-buy-button {
+        min-height: 45px;
+        padding: 0 13px;
+        font-size: 0.75rem;
+      }
+
+      .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 75px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .brand {
+        font-size: 0.73rem;
+      }
+
+      .header-cta {
+        padding: 0 10px;
+      }
+
+      .floating-buy-copy {
+        display: none;
+      }
+
+      .floating-buy-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="./index.html" aria-label="Solowise India home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Solowise India</span>
+    </a>
+
+    <div class="header-middle">
+      <span>Digital playbook · 2026 edition</span>
+    </div>
+
+    <a class="header-cta" href="./product.html?productid=2">
+      Get the playbook
+    </a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="hero-label">The practical freelancer system · 2026</div>
+
+        <h1 class="hero-title">
+          Stop learning freelancing.<br />
+          Start learning how to <span class="accent">get clients.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          The practical playbook for aspiring and struggling freelancers who
+          want to find clients, pitch confidently, use AI intelligently, and
+          close better-paying projects in 2026.
+        </p>
+
+        <div class="hero-no-list" aria-label="What this is not">
+          <span>No expensive course</span>
+          <span>No endless tutorials</span>
+          <span>No more guessing</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="main-button" href="./product.html?productid=2">
+            <span>Get the 2026 playbook</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </a>
+
+          <div class="hero-access">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+            <span>Instant digital access · Read anywhere · Beginner friendly</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="The 2026 Freelancer Playbook cover">
+        <div class="visual-stamp">
+          Launch<br />
+          offer<br />
+          ₹99
+        </div>
+
+        <article class="document-cover">
+          <div class="cover-top">
+            <span>Solowise India</span>
+            <span class="cover-number">01</span>
+          </div>
+
+          <div class="cover-middle">
+            <div class="cover-year">2026</div>
+            <h2 class="cover-title">
+              Freelancer
+              <span>Playbook</span>
+            </h2>
+          </div>
+
+          <div class="cover-bottom">
+            <div class="cover-bottom-copy">
+              A practical system for finding clients, pitching better, and
+              getting paid for your skill.
+            </div>
+            <div class="cover-price">₹99</div>
+          </div>
+        </article>
+
+        <div class="hero-price-panel">
+          <small>Introductory price</small>
+          <strong>₹99</strong>
+          <span>₹299 value · Limited launch pricing</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item">50+ AI prompts</span>
+        <span class="ticker-item">Client acquisition</span>
+        <span class="ticker-item">Cold email</span>
+        <span class="ticker-item">Cold calling</span>
+        <span class="ticker-item">High-ticket closing</span>
+        <span class="ticker-item">Practical experience</span>
+
+        <span class="ticker-item">50+ AI prompts</span>
+        <span class="ticker-item">Client acquisition</span>
+        <span class="ticker-item">Cold email</span>
+        <span class="ticker-item">Cold calling</span>
+        <span class="ticker-item">High-ticket closing</span>
+        <span class="ticker-item">Practical experience</span>
+      </div>
+    </div>
+
+    <!-- THE REAL PROBLEM -->
+    <section class="section">
+      <div class="problem-layout">
+        <div class="reveal">
+          <div class="section-kicker">
+            <span class="number">02</span>
+            <span>The real problem</span>
+          </div>
+
+          <h2 class="display-title">
+            You don’t have a freelancing problem.<br />
+            You have a <span class="highlight">“what do I do next?”</span> problem.
+          </h2>
+
+          <p class="lead-copy">
+            You learn a skill. You know you can do the work. Then comes the
+            part no tutorial seems to make simple: turning that skill into a
+            consistent path toward conversations, clients, and payment.
+          </p>
+
+          <div class="problem-list">
+            <div class="problem-list-item">
+              <span>01</span>
+              <span>Where do I find clients?</span>
+            </div>
+
+            <div class="problem-list-item">
+              <span>02</span>
+              <span>What do I message them?</span>
+            </div>
+
+            <div class="problem-list-item">
+              <span>03</span>
+              <span>How much should I charge?</span>
+            </div>
+
+            <div class="problem-list-item">
+              <span>04</span>
+              <span>What do I say on a call?</span>
+            </div>
+
+            <div class="problem-list-item">
+              <span>05</span>
+              <span>How do I close a better-paying project?</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="problem-quote-card reveal reveal-delay-1">
+          <div class="quote-label">The familiar loop</div>
+          <blockquote>
+            More videos.<br />
+            More saved posts.<br />
+            Still no system.
+          </blockquote>
+          <p>
+            You watch another tutorial, save another reel, create another
+            profile, send a few generic proposals—and eventually still feel
+            unsure about your next move.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- WHY THIS EXISTS -->
+    <section class="section">
+      <div class="narrative reveal">
+        <div class="section-kicker">
+          <span class="number">03</span>
+          <span>Why this exists</span>
+        </div>
+
+        <h2 class="display-title">
+          Freelancing advice is everywhere.<br />
+          A clear path is <span class="lime-text">not.</span>
+        </h2>
+
+        <p>
+          There is plenty of advice telling you to learn a high-income skill,
+          build a portfolio, make a Fiverr account, post consistently, and
+          send proposals. But the path from <strong>skill → prospect →
+          conversation → client → payment</strong> is surprisingly hard to
+          find in one practical place.
+        </p>
+
+        <p>
+          Knowing Photoshop does not teach you how to approach a business
+          owner. Knowing video editing does not teach you how to sell a
+          ₹30,000 project. Knowing AI tools does not automatically bring
+          clients.
+        </p>
+
+        <div class="advice-grid">
+          <div class="advice-card">
+            <q>Learn a high-income skill.</q>
+          </div>
+          <div class="advice-card">
+            <q>Build your portfolio.</q>
+          </div>
+          <div class="advice-card">
+            <q>Create a Fiverr account.</q>
+          </div>
+          <div class="advice-card">
+            <q>Send proposals.</q>
+          </div>
+        </div>
+
+        <p>
+          This playbook is built around the part that matters most:
+          <strong>turning your skill into a client-getting system.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- TWO GAMES -->
+    <section class="section big-idea">
+      <div class="reveal">
+        <div class="section-kicker">
+          <span class="number">04</span>
+          <span>The big idea</span>
+        </div>
+
+        <h2 class="display-title">
+          Freelancing has<br />
+          <span class="lime-text">two different games.</span>
+        </h2>
+      </div>
+
+      <div class="game-grid">
+        <article class="game-card reveal">
+          <div class="game-number">GAME #1</div>
+          <h3>Getting good at the skill.</h3>
+
+          <ul>
+            <li>Design</li>
+            <li>Development</li>
+            <li>Writing</li>
+            <li>Editing</li>
+            <li>Marketing</li>
+            <li>AI and automation</li>
+            <li>Whatever service you provide</li>
+          </ul>
+        </article>
+
+        <article class="game-card game-two reveal reveal-delay-1">
+          <div class="game-number">GAME #2</div>
+          <h3>Getting someone to pay you for it.</h3>
+
+          <ul>
+            <li>Finding prospects</li>
+            <li>Starting conversations</li>
+            <li>Writing outreach</li>
+            <li>Building trust</li>
+            <li>Handling objections</li>
+            <li>Closing deals</li>
+            <li>Increasing project value</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="game-note reveal">
+        Most beginners spend almost all their time playing Game #1, then wonder
+        why Game #2 is not working. This playbook focuses heavily on Game #2,
+        because being good at something and getting paid for it are two
+        different skills.
+      </p>
+    </section>
+
+    <!-- WHAT'S INSIDE -->
+    <section class="section">
+      <div class="contents-header reveal">
+        <div>
+          <div class="section-kicker">
+            <span class="number">05</span>
+            <span>What’s inside</span>
+          </div>
+
+          <h2 class="display-title">
+            What you get inside<br />
+            the playbook.
+          </h2>
+        </div>
+
+        <p class="contents-side-note">
+          Built to replace random learning with a practical, reusable
+          freelancer operating system.
+        </p>
+      </div>
+
+      <div class="feature-list">
+        <article class="feature-row reveal">
+          <div class="feature-index">01 / 05</div>
+
+          <div>
+            <h3>
+              <span>Toolkit</span>
+              50+ AI prompts
+            </h3>
+          </div>
+
+          <div class="feature-copy">
+            <p>
+              Stop staring at a blank ChatGPT screen. Get ready-to-use prompts
+              built around real freelancing tasks and workflows.
+            </p>
+
+            <ul class="feature-points">
+              <li>Finding prospects and researching potential clients</li>
+              <li>Writing outreach messages and proposals</li>
+              <li>Improving profiles and generating content ideas</li>
+              <li>Preparing for calls, objections, and follow-ups</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="feature-row reveal">
+          <div class="feature-index">02 / 05</div>
+
+          <div>
+            <h3>
+              <span>Pipeline</span>
+              Client acquisition
+            </h3>
+          </div>
+
+          <div class="feature-copy">
+            <p>
+              Stop waiting for clients. Learn how to identify potential clients,
+              understand what they need, and begin conversations that have a
+              reason to continue.
+            </p>
+
+            <ul class="feature-points">
+              <li>Who your ideal clients are</li>
+              <li>Where they can be found</li>
+              <li>How to understand their actual problems</li>
+              <li>How to move a conversation forward</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="feature-row reveal">
+          <div class="feature-index">03 / 05</div>
+
+          <div>
+            <h3>
+              <span>Outreach</span>
+              Cold email
+            </h3>
+          </div>
+
+          <div class="feature-copy">
+            <p>
+              Your first message should not sound like everyone else’s. Learn
+              how to structure outreach around a real business conversation,
+              not a generic request for work.
+            </p>
+
+            <ul class="feature-points">
+              <li>Observation → Problem → Value → Call to action</li>
+              <li>Frameworks you can adapt to your niche</li>
+              <li>Ways to avoid generic, forgettable messages</li>
+              <li>How to make outreach more relevant to the prospect</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="feature-row reveal">
+          <div class="feature-index">04 / 05</div>
+
+          <div>
+            <h3>
+              <span>Conversation</span>
+              Cold calling
+            </h3>
+          </div>
+
+          <div class="feature-copy">
+            <p>
+              Cold calling feels difficult when you do not know what to say.
+              The playbook breaks the conversation into a usable structure.
+            </p>
+
+            <ul class="feature-points">
+              <li>Opening and permission</li>
+              <li>Problem, value, and discovery questions</li>
+              <li>Presenting your offer with confidence</li>
+              <li>Ending with a clear next step</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="feature-row reveal">
+          <div class="feature-index">05 / 05</div>
+
+          <div>
+            <h3>
+              <span>Decision</span>
+              High-ticket closing
+            </h3>
+          </div>
+
+          <div class="feature-copy">
+            <p>
+              Getting a reply is not the same as getting paid. Learn how to
+              guide promising conversations toward a decision and a paid
+              project.
+            </p>
+
+            <ul class="feature-points">
+              <li>Client discovery and communicating value</li>
+              <li>Pricing conversations and negotiation</li>
+              <li>Handling objections more clearly</li>
+              <li>Closing and following up without guessing</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- AI -->
+    <section class="section ai-advantage">
+      <div class="ai-content reveal">
+        <div class="section-kicker">
+          <span class="number">06</span>
+          <span>The AI advantage</span>
+        </div>
+
+        <h2 class="display-title">
+          2026 is different.<br />
+          AI can help you move <span class="lime-text">faster.</span>
+        </h2>
+
+        <p class="lead-copy">
+          Research faster. Write faster. Prepare faster. Create faster.
+          Communicate faster. But AI itself is not the advantage—knowing how to
+          use it strategically is.
+        </p>
+
+        <div class="ai-points">
+          <span class="ai-point">Research prospects</span>
+          <span class="ai-point">Create outreach</span>
+          <span class="ai-point">Build proposals</span>
+          <span class="ai-point">Prepare for calls</span>
+          <span class="ai-point">Handle objections</span>
+          <span class="ai-point">Improve workflow</span>
+        </div>
+
+        <p class="lead-copy">
+          These are not vague prompts like <em>“write me something cool.”</em>
+          They are practical prompts built around actual tasks freelancers face.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section">
+      <div class="experience-layout">
+        <article class="experience-statement reveal">
+          <small>Section 07 · Experience over theory</small>
+          <h3>
+            Learn from experience.<br />
+            Not just information.
+          </h3>
+          <p>
+            Tutorials can teach tools. Experience teaches you what changes when
+            prospects become clients, when budgets appear, and when a
+            conversation turns into a decision.
+          </p>
+        </article>
+
+        <div class="reveal reveal-delay-1">
+          <div class="section-kicker">
+            <span class="number">07</span>
+            <span>The pro freelancer experience</span>
+          </div>
+
+          <h2 class="display-title">
+            Practical lessons<br />
+            behind the scenes.
+          </h2>
+
+          <div class="experience-points">
+            <div class="experience-point">What clients actually care about</div>
+            <div class="experience-point">Why some pitches get ignored</div>
+            <div class="experience-point">How conversations change when money enters</div>
+            <div class="experience-point">Why freelancers struggle with pricing</div>
+            <div class="experience-point">How to think more like a business</div>
+            <div class="experience-point">What beginners commonly get wrong</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAILURE LOOP -->
+    <section class="section loop-section">
+      <div class="loop-layout">
+        <div class="reveal">
+          <div class="section-kicker">
+            <span class="number">08</span>
+            <span>The failure loop</span>
+          </div>
+
+          <h2 class="display-title">
+            Here’s how<br />
+            most beginners<br />
+            get <span class="highlight">stuck.</span>
+          </h2>
+        </div>
+
+        <div class="reveal reveal-delay-1">
+          <div class="loop-steps">
+            <div class="loop-step">
+              <span class="loop-count">01</span>
+              <p>Learn a skill.</p>
+            </div>
+
+            <div class="loop-step">
+              <span class="loop-count">02</span>
+              <p>Create a profile.</p>
+            </div>
+
+            <div class="loop-step">
+              <span class="loop-count">03</span>
+              <p>Send generic proposals.</p>
+            </div>
+
+            <div class="loop-step">
+              <span class="loop-count">04</span>
+              <p>Get ignored.</p>
+            </div>
+
+            <div class="loop-step emphasis">
+              <span class="loop-count">05</span>
+              <p>Think: “Freelancing is too saturated.”</p>
+            </div>
+
+            <div class="loop-step">
+              <span class="loop-count">06</span>
+              <p>Learn another skill.</p>
+            </div>
+
+            <div class="loop-step emphasis">
+              <span class="loop-count">07</span>
+              <p>Repeat.</p>
+            </div>
+          </div>
+
+          <article class="break-loop-card">
+            <div class="mini-label">A different answer</div>
+            <h3>Break the <span>loop.</span></h3>
+            <p>
+              The problem may not be that you need another skill. You may need
+              to learn how to sell the skill you already have.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVERSE PROOF -->
+    <section class="section reverse-proof">
+      <div class="reveal">
+        <div class="section-kicker">
+          <span class="number">09</span>
+          <span>Reverse proof</span>
+        </div>
+
+        <h2 class="display-title">
+          You can have everything<br />
+          and still make <span class="lime-text">₹0.</span>
+        </h2>
+      </div>
+
+      <div class="proof-grid">
+        <article class="proof-card reveal">
+          <p>A good portfolio</p>
+        </article>
+
+        <article class="proof-card reveal reveal-delay-1">
+          <p>A valuable skill</p>
+        </article>
+
+        <article class="proof-card reveal reveal-delay-2">
+          <p>A decent profile</p>
+        </article>
+
+        <article class="proof-card reveal reveal-delay-3">
+          <p>Years of learning</p>
+        </article>
+      </div>
+
+      <p class="proof-conclusion reveal">
+        None of those automatically create a client. The market does not pay
+        you simply because you are talented. It pays you when you can
+        <strong>communicate value and solve a problem</strong> someone is
+        willing to pay for.
+      </p>
+    </section>
+
+    <!-- HIDDEN COST -->
+    <section class="section cost-section">
+      <div class="cost-layout">
+        <div class="reveal">
+          <div class="section-kicker">
+            <span class="number">10</span>
+            <span>The hidden cost</span>
+          </div>
+
+          <h2 class="display-title">
+            What is not learning client acquisition <span class="highlight">costing you?</span>
+          </h2>
+
+          <p class="lead-copy">
+            Let’s say you could have landed just one ₹5,000 client every month.
+            This is not a guarantee—it is a simple way to see the opportunity
+            cost of spending months without a repeatable system.
+          </p>
+
+          <div class="cost-question">
+            How much time have you already spent learning freelancing—and how
+            much of it taught you how to actually get paid?
+          </div>
+        </div>
+
+        <aside class="math-card reveal reveal-delay-1">
+          <small>One additional client per month</small>
+          <p class="math-equation">
+            ₹5,000 <span>×</span> 12<br />
+            = ₹60,000
+          </p>
+          <p>
+            Potential annual revenue from one additional ₹5,000 client each
+            month. The ₹99 is not the biggest cost. The bigger cost can be
+            going in circles for another few months.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- WHO IT IS FOR -->
+    <section class="section audience-section">
+      <div class="reveal">
+        <div class="section-kicker">
+          <span class="number">11</span>
+          <span>Who this is for</span>
+        </div>
+
+        <h2 class="display-title">
+          This playbook is<br />
+          for <span class="lime-text">you</span> if…
+        </h2>
+      </div>
+
+      <div class="audience-grid">
+        <article class="audience-card reveal">
+          <div class="audience-index">01</div>
+          <h3>You’re a beginner</h3>
+          <p>You have a skill but do not know where to begin or what to do next.</p>
+        </article>
+
+        <article class="audience-card reveal reveal-delay-1">
+          <div class="audience-index">02</div>
+          <h3>You’re struggling for clients</h3>
+          <p>You are sending messages and proposals but getting little response.</p>
+        </article>
+
+        <article class="audience-card reveal reveal-delay-2">
+          <div class="audience-index">03</div>
+          <h3>You want better projects</h3>
+          <p>You want to understand how better-value projects are approached and closed.</p>
+        </article>
+
+        <article class="audience-card reveal">
+          <div class="audience-index">04</div>
+          <h3>You’re a student</h3>
+          <p>You want to explore freelancing alongside your studies with more clarity.</p>
+        </article>
+
+        <article class="audience-card reveal reveal-delay-1">
+          <div class="audience-index">05</div>
+          <h3>You’re switching careers</h3>
+          <p>You want to turn an existing skill into a freelance income stream.</p>
+        </article>
+
+        <article class="audience-card reveal reveal-delay-2">
+          <div class="audience-index">06</div>
+          <h3>You already freelance</h3>
+          <p>You want sharper systems for outreach, AI, and client acquisition.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- NOT FOR EVERYONE -->
+    <section class="section">
+      <div class="not-for-section">
+        <div class="reveal">
+          <div class="section-kicker">
+            <span class="number">12</span>
+            <span>Who it is not for</span>
+          </div>
+
+          <h2 class="display-title">
+            This isn’t for <span class="highlight">everyone.</span>
+          </h2>
+
+          <div class="not-for-list">
+            <div class="not-for-item">A magic button that makes money overnight</div>
+            <div class="not-for-item">Guaranteed income promises</div>
+            <div class="not-for-item">“Earn ₹1 lakh in 7 days” claims</div>
+            <div class="not-for-item">A replacement for learning a valuable skill</div>
+            <div class="not-for-item">Motivation without action</div>
+          </div>
+        </div>
+
+        <article class="execution-card reveal reveal-delay-1">
+          <h3>
+            Frameworks help.<br />
+            <span>Execution wins.</span>
+          </h3>
+
+          <p>
+            This playbook gives you frameworks, strategies, prompts, and tools.
+            You still have to send the message, make the call, follow up, and
+            do the work. No ebook can do that part for you.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- BEFORE / AFTER -->
+    <section class="section before-after">
+      <div class="before-after-header reveal">
+        <div class="section-kicker">
+          <span class="number">13</span>
+          <span>What changes after reading?</span>
+        </div>
+
+        <h2 class="display-title">
+          The goal is not to feel like a freelancer.<br />
+          The goal is to <span class="lime-text">behave like one.</span>
+        </h2>
+      </div>
+
+      <div class="before-after-grid">
+        <article class="mindset-card reveal">
+          <span class="mindset-label">Before the playbook</span>
+
+          <ul class="mindset-list">
+            <li>“I don’t know where to find clients.”</li>
+            <li>“I don’t know what to message.”</li>
+            <li>“What should I charge?”</li>
+            <li>“What if they say no?”</li>
+            <li>“I don’t know what to say on a call.”</li>
+            <li>“Maybe I need another skill.”</li>
+            <li>“I’ll start next month.”</li>
+          </ul>
+        </article>
+
+        <article class="mindset-card after reveal reveal-delay-1">
+          <span class="mindset-label">After the playbook</span>
+
+          <ul class="mindset-list">
+            <li>“I know who I should target.”</li>
+            <li>“I have outreach frameworks.”</li>
+            <li>“I know how to use AI in my workflow.”</li>
+            <li>“I understand how to approach cold email.”</li>
+            <li>“I have a structure for cold calls.”</li>
+            <li>“I understand high-ticket closing basics.”</li>
+            <li>“I have a clearer action plan.”</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ₹99 MOMENT -->
+    <section class="section price-moment">
+      <div class="price-layout">
+        <div class="reveal">
+          <div class="section-kicker">
+            <span class="number">14</span>
+            <span>The ₹99 moment</span>
+          </div>
+
+          <h2 class="display-title">
+            How much is your freelancing career worth <span class="lime-text">to you?</span>
+          </h2>
+
+          <p class="lead-copy">
+            A ₹99 decision will not magically change your life. But the
+            knowledge you actually implement from it might change the way you
+            approach freelancing.
+          </p>
+        </div>
+
+        <div class="price-comparison reveal reveal-delay-1">
+          <div class="comparison-item">
+            <span>A random food order</span>
+            <strong>₹99+</strong>
+          </div>
+
+          <div class="comparison-item">
+            <span>A couple of coffees</span>
+            <strong>₹99+</strong>
+          </div>
+
+          <div class="comparison-item">
+            <span>A forgotten subscription</span>
+            <strong>₹99+</strong>
+          </div>
+
+          <div class="comparison-item">
+            <span>The 2026 Freelancer Playbook</span>
+            <strong>₹99</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFER -->
+    <section class="section offer-section">
+      <article class="offer-card reveal">
+        <div class="offer-content">
+          <div class="offer-label">Section 15 · The offer</div>
+
+          <h2>
+            Get the 2026<br />
+            Freelancer <span>Playbook.</span>
+          </h2>
+
+          <ul class="offer-list">
+            <li>50+ AI prompts</li>
+            <li>Client acquisition techniques</li>
+            <li>Cold email strategies</li>
+            <li>Cold calling strategies</li>
+            <li>High-ticket closing frameworks</li>
+            <li>Practical freelancer experience</li>
+            <li>Beginner-friendly frameworks</li>
+            <li>Actionable examples</li>
+          </ul>
+
+          <div class="offer-bottom">
+            <div class="offer-price-wrap">
+              <small>Introductory price</small>
+              <div class="offer-price">
+                <strong>₹99</strong>
+                <del>₹299</del>
+              </div>
+            </div>
+
+            <a class="main-button" href="./product.html?productid=2">
+              <span>Yes, give me the playbook</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </a>
+
+            <p class="offer-assurance">
+              One payment · Digital product · Instant access
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- URGENCY -->
+    <section class="section">
+      <div class="urgency">
+        <div class="urgency-orb reveal" aria-hidden="true">
+          <div class="urgency-orb-inner">
+            Don’t wait<br />
+            until you’re<br />
+            ready.
+          </div>
+        </div>
+
+        <div class="urgency-copy reveal reveal-delay-1">
+          <div class="section-kicker">
+            <span class="number">16</span>
+            <span>Urgency</span>
+          </div>
+
+          <h2 class="display-title">
+            You’ll probably never feel completely <span class="highlight">ready.</span>
+          </h2>
+
+          <p>
+            There will always be another video, another course, another skill,
+            another tutorial, and another reason to wait. Meanwhile, someone
+            else is learning how to find the prospect, send the message, make
+            the call, close the deal, and get paid.
+          </p>
+
+          <p>
+            The best time to build your system is before you desperately need it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAUNCH OFFER -->
+    <section class="section launch-offer">
+      <article class="launch-banner reveal">
+        <div>
+          <div class="alert-label">🚨 2026 launch offer</div>
+
+          <h2>
+            Get the complete Freelancer Playbook for just <span>₹99.</span>
+          </h2>
+
+          <p>
+            Launch pricing will not stay forever. The price will increase as the
+            playbook evolves and additional resources are added. If you are
+            serious about starting or improving your freelancing journey in
+            2026, this is the time to get started.
+          </p>
+
+          <div style="margin-top: 27px;">
+            <a class="main-button" href="./product.html?productid=2">
+              <span>Get the ₹99 playbook</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="launch-price">
+          <small>Today</small>
+          <strong>₹99</strong>
+          <del>₹299</del>
+        </div>
+      </article>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+      <div class="faq-header reveal">
+        <div>
+          <div class="section-kicker">
+            <span class="number">18</span>
+            <span>Frequently asked questions</span>
+          </div>
+
+          <h2 class="display-title">
+            A few clear<br />
+            answers.
+          </h2>
+        </div>
+
+        <p class="faq-note">
+          This is designed to be practical and honest. No income guarantees,
+          hype, or promises that skip the work.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Is this a course?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                No. It is a practical digital playbook designed to be read and
+                implemented at your own pace. It focuses on frameworks,
+                strategies, prompts, and actionable approaches you can adapt to
+                your freelance service.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Is this only for beginners?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                No. Beginners can use it to build a stronger foundation, while
+                existing freelancers can use the outreach, AI, client
+                acquisition, and closing frameworks to improve their approach.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Do I need a specific skill?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                You should have—or be willing to develop—a service you can
+                offer clients. The playbook focuses heavily on finding,
+                approaching, and closing clients for service-based freelancing.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Is income guaranteed?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                No. There are no guaranteed-income promises. Your results depend
+                on your skill, offer, market, execution, communication,
+                consistency, and the value you create for clients.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>What types of freelancers can use it?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Designers, developers, writers, video editors, marketers,
+                social media managers, AI freelancers, virtual assistants, and
+                many other service-based freelancers can adapt the strategies.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>How do I receive it?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                It is a digital product. You will receive access after
+                completing your purchase, and you can revisit your secure order
+                page using your order ID.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item reveal">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>Why only ₹99?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                The goal is to make practical freelancing knowledge accessible
+                to students, beginners, and aspiring freelancers without asking
+                them to spend thousands on a course before they know whether
+                freelancing is right for them.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <div class="final-cta-content reveal">
+        <div class="section-kicker">
+          <span class="number">Final</span>
+          <span>Your next move</span>
+        </div>
+
+        <h2>
+          Your skill is only<br />
+          <span>half the equation.</span>
+        </h2>
+
+        <p>
+          You can keep learning, watching, saving posts, and waiting. Or you
+          can start learning how to turn your skill into a client-getting
+          system.
+        </p>
+
+        <div class="final-product-line">
+          The 2026 Freelancer Playbook<br />
+          50+ AI prompts · Client acquisition · Cold outreach · High-ticket closing
+        </div>
+
+        <div class="final-price">₹99</div>
+
+        <a class="main-button" href="./product.html?productid=2">
+          <span>🚀 Get the playbook for ₹99</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14"></path>
+            <path d="m13 6 6 6-6 6"></path>
+          </svg>
+        </a>
+
+        <div class="final-trust">
+          Start today · Learn the system · Take action
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="currentYear"></span> Solowise India. All rights reserved.</span>
+    <a href="./product.html?productid=2">Get The 2026 Freelancer Playbook →</a>
+  </footer>
+
+  <aside id="floatingBuyBar" class="floating-buy-bar" aria-label="Buy The 2026 Freelancer Playbook">
+    <div class="floating-buy-inner">
+      <div class="floating-buy-copy">
+        <div class="floating-buy-title">The 2026 Freelancer Playbook</div>
+        <div class="floating-buy-price">Introductory price · ₹99</div>
+      </div>
+
+      <a class="floating-buy-button" href="./product.html?productid=2">
+        <span>Get it for ₹99</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+  </aside>
+
+  <script>
+    const productUrl = "./product.html?productid=2";
+
+    /*
+      Reveal sections smoothly when they enter the viewport.
+      Falls back to visible content for older browsers.
+    */
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -35px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => {
+        element.classList.add("revealed");
+      });
+    }
+
+    /*
+      FAQ accordion.
+      Only one FAQ is open at a time to keep the section clean.
+    */
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector(".faq-question");
+
+      button.addEventListener("click", () => {
+        const isAlreadyOpen = item.classList.contains("active");
+
+        faqItems.forEach((otherItem) => {
+          otherItem.classList.remove("active");
+
+          const otherButton = otherItem.querySelector(".faq-question");
+          otherButton.setAttribute("aria-expanded", "false");
+        });
+
+        if (!isAlreadyOpen) {
+          item.classList.add("active");
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    /*
+      Display the fixed purchase bar once visitors have scrolled
+      beyond the hero section.
+    */
+    const floatingBuyBar = document.getElementById("floatingBuyBar");
+    const heroSection = document.querySelector(".hero");
+
+    function updateFloatingBuyBar() {
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      const shouldShow = heroBottom < window.innerHeight * 0.45;
+
+      floatingBuyBar.classList.toggle("visible", shouldShow);
+    }
+
+    window.addEventListener("scroll", updateFloatingBuyBar, {
+      passive: true
+    });
+
+    window.addEventListener("resize", updateFloatingBuyBar, {
+      passive: true
+    });
+
+    updateFloatingBuyBar();
+
+    /*
+      Makes all product CTAs resilient if you later change the product URL.
+    */
+    document.querySelectorAll('a[href="./product.html?productid=2"]').forEach((link) => {
+      link.href = productUrl;
+    });
+
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+  </html>
