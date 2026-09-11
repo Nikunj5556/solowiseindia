@@ -1819,6 +1819,7 @@ function getAffiliateId() {
         customerName: state.customerName,
         customerEmail: state.customerEmail,
         couponCode: state.coupon?.code || null,
+        affiliateId: state.affiliateId || null,
         clientMetadata: {
           page_url: window.location.href,
           referrer: document.referrer || null,
@@ -1997,6 +1998,8 @@ function getAffiliateId() {
     }
 
     async function loadProduct() {
+      state.affiliateId = getAffiliateId();
+
       const productId = getProductIdFromUrl();
 
       if (!productId) {
