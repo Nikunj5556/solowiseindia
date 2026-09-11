@@ -1131,6 +1131,38 @@
       activeImage: 0,
       countdownInterval: null
     };
+    /* =========================================
+   AFFILIATE TRACKING
+   ========================================= */
+
+function captureAffiliateId() {
+  const params = new URLSearchParams(window.location.search);
+
+  // Supports:
+  // ?utmsource=UUID
+  // ?utm_source=UUID
+  const affiliateId =
+    params.get("utmsource") ||
+    params.get("utm_source");
+
+  if (!affiliateId) {
+    return;
+  }
+
+  // Basic UUID validation
+  const uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  if (!uuidRegex.test(affiliateId)) {
+    console.warn("Invalid affiliate ID.");
+    return;
+  }
+
+  // Save for the checkout page
+  localStorage.setItem("solowise_affiliate_id", affiliateId);
+
+  console.log("Affiliate captured:", affiliateId);
+}
 
     const elements = {
       loadingState: document.getElementById("loadingState"),
@@ -1543,7 +1575,7 @@
         state.productId
       )}`;
     });
-
+    captureAffiliateId();
     loadProduct();
   </script>
 </body>
