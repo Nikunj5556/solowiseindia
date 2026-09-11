@@ -1340,6 +1340,37 @@
       isPaying: false
     };
 
+    /* =========================================
+   AFFILIATE TRACKING
+   ========================================= */
+
+function getAffiliateId() {
+  const params = new URLSearchParams(window.location.search);
+
+  // First check the checkout URL itself
+  const urlAffiliateId =
+    params.get("utmsource") ||
+    params.get("utm_source");
+
+  if (urlAffiliateId) {
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+    if (uuidRegex.test(urlAffiliateId)) {
+      // Refresh attribution if checkout itself has an affiliate ID
+      localStorage.setItem(
+        "solowise_affiliate_id",
+        urlAffiliateId
+      );
+
+      return urlAffiliateId;
+    }
+  }
+
+  // Otherwise use the affiliate captured on product.html
+  return localStorage.getItem("solowise_affiliate_id") || null;
+}
+
     const elements = {
       loadingState: document.getElementById("loadingState"),
       errorState: document.getElementById("errorState"),
