@@ -555,6 +555,21 @@
       text-underline-offset: 3px;
     }
 
+    .upsell-embed-section {
+      width: 100%;
+      margin-top: clamp(40px, 6vw, 72px);
+    }
+
+    .upsell-embed-section iframe {
+      display: block;
+      width: 100%;
+      min-height: 920px;
+      height: 2400px;
+      border: 0;
+      border-radius: 28px;
+      background: transparent;
+    }
+
     .support-card {
       margin-top: 15px;
       padding: clamp(21px, 4vw, 31px);
@@ -743,6 +758,10 @@
       .product-card {
         width: min(580px, 100%);
       }
+    }
+
+    @media (max-width: 850px) {
+      .upsell-embed-section iframe { min-height: 980px; }
     }
 
     @media (max-width: 620px) {
@@ -953,6 +972,10 @@
       </aside>
     </div>
 
+    <section id="upsellOfferSection" class="upsell-embed-section" aria-label="Private Freelancer Execution Kit offer">
+      <iframe id="upsellFrame" title="Freelancer Execution Kit customer offer" src="./upsell.html" loading="eager" scrolling="no"></iframe>
+    </section>
+
     <section class="info-section">
       <article class="info-card">
         <div class="info-card-icon">
@@ -1048,7 +1071,9 @@
       downloadButton: document.getElementById("downloadButton"),
       downloadButtonText: document.getElementById("downloadButtonText"),
 
-      supportEmailLink: document.getElementById("supportEmailLink")
+      supportEmailLink: document.getElementById("supportEmailLink"),
+      upsellOfferSection: document.getElementById("upsellOfferSection"),
+      upsellFrame: document.getElementById("upsellFrame")
     };
 
     function getOrderIdFromUrl() {
@@ -1177,6 +1202,23 @@
       elements.customerEmailDisplay.textContent = customerEmail;
 
       renderProductImage(productImage, productName);
+
+      const upsellParam = new URLSearchParams(window.location.search).get("upsell") === "1";
+      if (elements.upsellOfferSection) {
+        if (upsellParam) {
+          elements.upsellOfferSection.classList.add("hidden");
+        } else {
+          elements.upsellOfferSection.classList.remove("hidden");
+          const source = new URL("./upsell.html", window.location.href);
+          source.searchParams.set("source_orderid", order.orderid);
+          elements.upsellFrame.src = source.toString();
+        }
+      }
+
+      try {
+        if (order.customer_email) localStorage.setItem("solowise_customer_email", String(order.customer_email));
+        if (order.customer_name) localStorage.setItem("solowise_customer_name", String(order.customer_name));
+      } catch (_) {}
 
       const supportSubject = encodeURIComponent(
         `Order support request — ${order.orderid}`
@@ -1347,6 +1389,15 @@
 
     elements.downloadButton.addEventListener("click", requestDownload);
     elements.copyOrderButton.addEventListener("click", copyOrderId);
+
+    window.addEventListener("message", (event) => {
+      if (event?.data?.type !== "solowise-upsell-height") return;
+      if (!elements.upsellFrame || event.source !== elements.upsellFrame.contentWindow) return;
+      const height = Number(event.data.height);
+      if (Number.isFinite(height) && height > 300 && height < 10000) {
+        elements.upsellFrame.style.height = `${height + 8}px`;
+      }
+    });
 
     loadPaidOrder();
   </script>
