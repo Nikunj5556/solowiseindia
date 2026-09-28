@@ -1708,6 +1708,12 @@ function getAffiliateId() {
 
       state.customerName = name;
       state.customerEmail = email;
+
+      try {
+        localStorage.setItem("solowise_customer_name", name);
+        localStorage.setItem("solowise_customer_email", email);
+      } catch (_) {}
+
       return true;
     }
 
