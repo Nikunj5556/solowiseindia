@@ -1989,7 +1989,17 @@ function getAffiliateId() {
           reject(new Error(reason));
         });
 
-        razorpay.open();
+        if (typeof fbq === "function") {
+  fbq("track", "AddPaymentInfo", {
+    content_ids: [String(state.productId)],
+    content_type: "product",
+    content_name: checkoutData.productName,
+    value: Number(checkoutData.amountPaise) / 100,
+    currency: "INR"
+  });
+}
+
+razorpay.open();
       });
     }
 
@@ -2105,6 +2115,17 @@ function getAffiliateId() {
 
       elements.customerPreview.innerHTML =
         `<strong>${safeName}</strong><br>${safeEmail}`;
+
+      if (typeof fbq === "function") {
+  fbq("track", "InitiateCheckout", {
+    content_ids: [String(state.productId)],
+    content_type: "product",
+    content_name: state.product?.name || "Product",
+    value: currentTotalAmount(),
+    currency: "INR",
+    num_items: 1
+  });
+}
 
       showStep(2);
     });
