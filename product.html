@@ -1520,7 +1520,17 @@ function captureAffiliateId() {
       elements.productPage.classList.remove("hidden");
       elements.buyBar.classList.remove("hidden");
     }
-
+// Meta Pixel — product viewed
+if (typeof fbq === "function") {
+  fbq("track", "ViewContent", {
+    content_ids: [String(product.id)],
+    content_type: "product",
+    content_name: name,
+    value: actualPrice,
+    currency: "INR"
+  });
+}
+    
     async function loadProduct() {
       const productId = getProductIdFromUrl();
 
