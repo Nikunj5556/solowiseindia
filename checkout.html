@@ -1040,6 +1040,16 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2124233408162735&ev=PageView&noscript=1" /></noscript>
 
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-30149MQVVT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-30149MQVVT", { send_page_view: true });
+  </script>
+
 </head>
 
 <body>
@@ -1316,6 +1326,56 @@
     const SUPABASE_URL = "https://iqjdqtdzpdhuicfheybi.supabase.co";
 
     const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxamRxdGR6cGRodWljZmhleWJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NDcxNjksImV4cCI6MjEwNDUyMzE2OX0.NL6txgwRDmqSf7w6oqsTrKyW_OfyOn4vS_tyZF_kY1A";
+
+    /* Google Analytics 4 ecommerce tracking. Never send PII such as email, name, phone, IP, or Razorpay payment ID. */
+    const GA_MEASUREMENT_ID = "G-30149MQVVT";
+
+    function gaTrack(eventName, eventData = {}) {
+      if (typeof window.gtag !== "function") {
+        console.warn(`GA4 unavailable: ${eventName}`);
+        return;
+      }
+      window.gtag("event", eventName, eventData);
+    }
+
+    function gaNumber(value, fallback = 0) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number : fallback;
+    }
+
+    function gaItem(product, options = {}) {
+      return {
+        item_id: String(product?.id || product?.product_id || ""),
+        item_name: String(product?.name || product?.product_name || "Solowise India product"),
+        item_category: "Digital product",
+        price: gaNumber(options.price ?? product?.actualprice ?? product?.price),
+        quantity: gaNumber(options.quantity ?? 1, 1),
+        ...(options.coupon ? { coupon: String(options.coupon) } : {})
+      };
+    }
+
+    function gaClientId() {
+      const prefix = `_ga_${GA_MEASUREMENT_ID.replace(/^G-/, "").replace(/-/g, "_")}`;
+      const cookie = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith(`${prefix}=`));
+
+      if (cookie) {
+        const value = decodeURIComponent(cookie.split("=").slice(1).join("="));
+        const match = value.match(/GS\d+\.\d+\.(\d+)\.(\d+)/);
+        if (match) return `${match[1]}.${match[2]}`;
+      }
+
+      const fallbackCookie = document.cookie
+        .split("; ")
+        .find((entry) => entry.startsWith("_ga="));
+
+      if (!fallbackCookie) return null;
+
+      const parts = decodeURIComponent(fallbackCookie.split("=").slice(1).join("=")).split(".");
+      return parts.length >= 4 ? `${parts[2]}.${parts[3]}` : null;
+    }
+
 
     /* Meta Pixel + CAPI browser bridge. Pixel ID is public; CAPI access token stays only in Edge Function secrets. */
     const META_PIXEL_ID = "2124233408162735";
@@ -1939,6 +1999,7 @@ function getAffiliateId() {
         customerEmail: state.customerEmail,
         couponCode: state.coupon?.code || null,
         affiliateId: state.affiliateId || null,
+        gaClientId: gaClientId(),
         initiateCheckoutEventId: state.initiateCheckoutEventId,
         addPaymentInfoEventId: state.addPaymentInfoEventId,
         attribution: metaAttribution(),
@@ -2103,6 +2164,13 @@ function getAffiliateId() {
           `${state.productId}_${state.customerEmail.toLowerCase()}`
         );
         const amount = currentTotalAmount();
+        gaTrack("add_payment_info", {
+          currency: "INR",
+          value: gaNumber(amount),
+          coupon: state.coupon?.code || undefined,
+          payment_type: "Razorpay",
+          items: [gaItem(state.product, { price: amount, coupon: state.coupon?.code || null })]
+        });
         const customData = {
           content_ids: [String(state.product.id)],
           content_type: "product",
@@ -2198,6 +2266,11 @@ function getAffiliateId() {
         renderProduct(products[0]);
 
         const product = products[0];
+        gaTrack("begin_checkout", {
+          currency: "INR",
+          value: gaNumber(product.actualprice),
+          items: [gaItem(product)]
+        });
         state.initiateCheckoutEventId = metaGetOrCreateEventId("InitiateCheckout", String(product.id));
         const customData = {
           content_ids: [String(product.id)],
