@@ -928,6 +928,13 @@
       }
     }
   </style>
+
+  <!-- Meta Pixel: replace ONLY this public Dataset/Pixel ID. Never add a CAPI token here. -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=YOUR_META_PIXEL_ID&ev=PageView&noscript=1" /></noscript>
+
 </head>
 
 <body>
@@ -1125,6 +1132,110 @@ After that, the price increases.</p>
   <script>
     const SUPABASE_URL = "https://iqjdqtdzpdhuicfheybi.supabase.co";
     const SUPABASE_ANON_KEY ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxamRxdGR6cGRodWljZmhleWJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5NDcxNjksImV4cCI6MjEwNDUyMzE2OX0.NL6txgwRDmqSf7w6oqsTrKyW_OfyOn4vS_tyZF_kY1A";
+
+    /* Meta Pixel + CAPI browser bridge. Pixel ID is public; CAPI access token stays only in Edge Function secrets. */
+    const META_PIXEL_ID = "YOUR_META_PIXEL_ID";
+    const META_TRACK_FUNCTION = `${SUPABASE_URL}/functions/v1/meta-track`;
+    const META_EXTERNAL_ID_KEY = "solowise_meta_external_id";
+    const META_LANDING_URL_KEY = "solowise_meta_landing_url";
+
+    function metaUuid() {
+      return crypto.randomUUID();
+    }
+
+    function metaGetOrCreateExternalId() {
+      let id = localStorage.getItem(META_EXTERNAL_ID_KEY);
+      if (!id) {
+        id = metaUuid();
+        localStorage.setItem(META_EXTERNAL_ID_KEY, id);
+      }
+      return id;
+    }
+
+    function metaEventKey(eventName, suffix = "") {
+      return `solowise_meta_${eventName.toLowerCase()}_${suffix || "default"}`;
+    }
+
+    function metaGetOrCreateEventId(eventName, suffix = "") {
+      const key = metaEventKey(eventName, suffix);
+      let eventId = sessionStorage.getItem(key);
+      if (!eventId) {
+        eventId = metaUuid();
+        sessionStorage.setItem(key, eventId);
+      }
+      return eventId;
+    }
+
+    function metaCookie(name) {
+      const escaped = name.replace(/[.$?*|{}()[\]\/+^]/g, "\$&");
+      const match = document.cookie.match(new RegExp(`(?:^|; )${escaped}=([^;]*)`));
+      return match ? decodeURIComponent(match[1]) : null;
+    }
+
+    function metaFbclid() {
+      return new URLSearchParams(window.location.search).get("fbclid");
+    }
+
+    function metaFbc() {
+      const existing = metaCookie("_fbc");
+      if (existing) return existing;
+      const fbclid = metaFbclid();
+      return fbclid ? `fb.1.${Date.now()}.${fbclid}` : null;
+    }
+
+    function metaAttribution() {
+      const query = new URLSearchParams(window.location.search);
+      return {
+        event_source_url: window.location.href,
+        landing_page_url: localStorage.getItem(META_LANDING_URL_KEY) || window.location.href,
+        referrer_url: document.referrer || null,
+        fbp: metaCookie("_fbp"),
+        fbc: metaFbc(),
+        external_id: metaGetOrCreateExternalId(),
+        fbclid: metaFbclid(),
+        utm_source: query.get("utm_source"),
+        utm_medium: query.get("utm_medium"),
+        utm_campaign: query.get("utm_campaign"),
+        utm_content: query.get("utm_content"),
+        utm_term: query.get("utm_term")
+      };
+    }
+
+    function metaTrackBrowser(eventName, eventId, customData) {
+      if (typeof window.fbq === "function" && META_PIXEL_ID !== "YOUR_META_PIXEL_ID") {
+        window.fbq("track", eventName, customData, { eventID: eventId });
+      }
+    }
+
+    async function metaTrackServer(payload) {
+      const response = await fetch(META_TRACK_FUNCTION, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ ...payload, attribution: metaAttribution() })
+      });
+      if (!response.ok) throw new Error(await response.text());
+      return response.json();
+    }
+
+    function metaTrackEvent(eventName, eventId, customData, serverPayload) {
+      metaTrackBrowser(eventName, eventId, customData);
+      metaTrackServer({ event_name: eventName, event_id: eventId, ...serverPayload })
+        .catch((error) => console.warn(`Meta CAPI ${eventName} failed`, error));
+    }
+
+    if (!localStorage.getItem(META_LANDING_URL_KEY)) {
+      localStorage.setItem(META_LANDING_URL_KEY, window.location.href);
+    }
+
+    if (typeof window.fbq === "function" && META_PIXEL_ID !== "YOUR_META_PIXEL_ID") {
+      window.fbq("init", META_PIXEL_ID, { external_id: metaGetOrCreateExternalId() });
+      window.fbq("track", "PageView");
+    }
+
 
     const state = {
       productId: null,
@@ -1552,6 +1663,22 @@ function captureAffiliateId() {
         }
 
         renderProduct(products[0]);
+
+        const product = products[0];
+        const eventId = metaGetOrCreateEventId("ViewContent", String(product.id));
+        const customData = {
+          content_ids: [String(product.id)],
+          content_type: "product",
+          content_name: product.name || "Product",
+          value: Number(product.actualprice) || 0,
+          currency: "INR"
+        };
+        metaTrackEvent("ViewContent", eventId, customData, {
+          product_id: Number(product.id),
+          product_name: product.name || "Product",
+          value: Number(product.actualprice) || 0,
+          currency: "INR"
+        });
       } catch (error) {
         console.error("Supabase product loading error:", error);
         showError(
@@ -1572,9 +1699,15 @@ function captureAffiliateId() {
     elements.buyNowButton.addEventListener("click", () => {
       if (!state.productId) return;
 
-      window.location.href = `./checkout.html?productid=${encodeURIComponent(
-        state.productId
-      )}`;
+      /* Persist attribution across the product -> checkout navigation. */
+      const next = new URL("./checkout.html", window.location.href);
+      next.searchParams.set("productid", state.productId);
+      const current = new URLSearchParams(window.location.search);
+      ["fbclid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utmsource"].forEach((key) => {
+        const value = current.get(key);
+        if (value) next.searchParams.set(key, value);
+      });
+      window.location.href = next.toString();
     });
     captureAffiliateId();
     loadProduct();
