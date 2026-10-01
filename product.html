@@ -1605,7 +1605,19 @@ if (typeof fbq === "function") {
 
     elements.buyNowButton.addEventListener("click", () => {
       if (!state.productId) return;
-
+  if (typeof fbq === "function") {
+    fbq("track", "InitiateCheckout", {
+      content_ids: [String(state.productId)],
+      content_type: "product",
+      content_name: elements.productName.textContent,
+      value: Number(
+        elements.actualPrice.textContent
+          .replace(/[^\d.]/g, "")
+          .replace(/,/g, "")
+      ) || 0,
+      currency: "INR"
+    });
+  }
       window.location.href = `./checkout.html?productid=${encodeURIComponent(
         state.productId
       )}`;
